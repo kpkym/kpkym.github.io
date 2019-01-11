@@ -137,6 +137,161 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-总结/os" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/11/总结/os/">OS</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/11/总结/os/" class="archive-article-date">
+  	<time datetime="2019-01-11T07:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><ol>
+<li>操作系统是一种系统软件，是软，硬资源的控制中心，它以尽量合理有效的方法组织单个或多个用户以多任务方式共享计算机的各种资源。</li>
+<li>资源管理包含两种资源共享使用的方法：时分、空分。</li>
+<li>专用操作系统：多道批处理系统、分时系统、实时系统</li>
+<li>操作系统的最基本特征：并发、共享。</li>
+<li>分时系统的最基本特点：并发性、共享性、交互性、独立性。</li>
+<li>实时系统可分为 ：实时控制、实时事务处理。</li>
+<li>实时系统的特征与功能：时钟分辨度高、支持可剥夺任务调度、多级中断机制。</li>
+<li>主要操作系统：Windows、Linux、UNIX、Solaris、AIX、HP UX、MAC OS、NetWare。</li>
+</ol>
+<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><ol>
+<li>中断的引入是为了开发 CPU 和通道之间的并行操作。</li>
+<li>中断也称为外中断。异常称为内中断、例外或陷入。</li>
+<li>断点：CPU 刚执行完的那条指令地址称为断点，断点应为中断的那一瞬间程序计数器所指指令的前一条指令地址，即中断发生时正在执行的那一条指令的地址。</li>
+<li>恢复点：中断时程序计数器所指的地址。</li>
+<li>核心态：也称为管态、系统状态、监督方式。</li>
+<li>用户态：目态、用户状态、用户方式。</li>
+<li>Intel x86 上运行的操作系统只用到 0 环和 3 环，0 环表示核心态，3 环表示用户态。</li>
+<li>一般为系统中每个中断/异常信号编制一个相应的中断/异常处理程序，并把这些程序的入口地址放在特定的主存单元中。通常将这片存放中断/异常处理程序入口地址的主存单元称为中断/异常向量，或系统控制块。</li>
+<li>中断/异常处理<ol>
+<li>中断/异常进入</li>
+<li>保存现场</li>
+<li>分析原因并转中断/异常处理程序</li>
+<li>恢复现场</li>
+</ol>
+</li>
+</ol>
+<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h1><ol>
+<li>自陷指令：是系统调用的一种形式</li>
+<li>进程：进程是支持程序执行的机制，进程可以理解为程序对数据或请求的处理过程。</li>
+<li>进程控制块：操作系统建立一个表格用来描述该进程的存在及状态。它描述进程标识、空间、运行状态、资源使用等信息。</li>
+<li>进程状态变化图：P52</li>
+<li>调度：高级调度、中级调度、低级调度。</li>
+<li>进程调度方式：非剥夺方式、剥夺方式。</li>
+</ol>
+<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><ol>
+<li>同步关系：为完成用户任务的伙伴进程间，因为需要在某些位置上协调它们的工作次序而等待、传递信息所产生的制约关系。</li>
+<li>互斥关系：进程间因相互竞争使用独占型资源所产生的制约关系，如进程间因争夺打印机设备而导致一方须待另一方使用结束后方可使用。</li>
+<li>临界资源：一次仅允许一个进程使用的资源。</li>
+<li>临界段：各进程必须互斥执行的那种程序段，该程序段实施对临界资源的操作。</li>
+<li>解决临界段问题的硬件实现方法<br>屏蔽中断方法<br>Test_and_Set 指令<br>Swap 指令</li>
+<li>原语：完成某种功能且不被分割、不被中断执行的操作序列。</li>
+<li>信号量：信号量机制是一种功能较强的机制，可用来解决互斥与同步问题。</li>
+<li>进程通信：共享存储方法、消息传递方法。</li>
+<li>死锁：在一个进程集合中，若每个进程都在等待某些释放资源事件的发生，而这些事件又必须由这个进程集合中的某些进程来产生，就称该进程集合处于死锁状态。</li>
+<li>死锁出现必须满足的必要条件：互斥、占有等待、非剥夺、循环等待。</li>
+</ol>
+<h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h1><ol>
+<li>连续空间分配：单道连续分配、多道固定分区法、多道连续可变分区法。</li>
+<li>不连续空间分配：页式管理、段式管理、段页式管理、改进的页式管理。</li>
+<li>存储碎片：进入各存储块的作业长度往往短于该块的长度，因而存在一些未加利用的存储空间。若大作业较多，小存储块就常处于空闲状态而形成浪费。这些为得到利用的空间称为存储碎片。</li>
+<li>假设访问主存的时间为 750ns，搜索快表的时间为 50ns，命中率为 80%，则可求出平均访问指令执行时间为：<br>80% X（50+750）+20%X（50+750+750）=950ns</li>
+<li>Belady 奇异：替换策略不符合随着驻留集大小的增大，页故障数一定减少的规律。</li>
+<li>驻留集替换策略 (FIFO、OPT、LRU)</li>
+<li>驻留集可变的替换策略：WS、SWS、VMIN。</li>
+</ol>
+<h1 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h1><ol>
+<li>常见外部设备分类：人机交互类外部设备、存储类外部设备、网络通信外部设备。</li>
+<li>I/O 控制方式：程序直接控制方式、中断驱动方式、DMA 方式、I/O 通道控制方式。</li>
+<li>设备驱动程序：一个设备驱动程序一般管理相同类的所有设备，它由许多子程序组成，这些子程序与设备特性相关，通常由上层设备无关层设备类系统调用处理函数调用。</li>
+<li>缓冲技术：单缓冲、双缓冲、循环缓冲。</li>
+</ol>
+<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><ol>
+<li>文件：文件室友创建者定义的一组相关信息。通常将程序（源程序、目标代码）和数据组织成文件。</li>
+<li>文件的访问方式：顺序访问、直接访问。</li>
+<li>文件在辅存的存放方法：顺序结构、链接结构、索引结构。</li>
+<li>文件控制块：文件应包括文件控制块和文件体。后者是文件的有效信息部分；前者则是一张用于存放文件标识、定位、说明和控制等信息的表格。</li>
+<li>一级目录结构：为辅存的全部文件设立一张逻辑上线性排列的目录表。</li>
+<li>文件访问保护：口令保护、加密保护、访问控制。</li>
+<li>文件备份：批量备份、同步备份。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Docker//" class="article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/11/总结/os/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-总结/docker 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1099,117 +1254,6 @@
 
 
   
-    <article id="post-总结/Python 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/19/总结/Python 总结/">Python 总结</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/19/总结/Python 总结/" class="archive-article-date">
-  	<time datetime="2017-12-19T07:18:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="noopener">廖雪峰 Python教程</a></p>
-<h1 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
-<li>整数</li>
-<li>浮点数</li>
-<li>字符串<blockquote>
-<p>如果字符串内部有很多换行，用\n写在一行里不好阅读，为了简化，Python允许用’’’…’’’的格式表示多行内容</p>
-</blockquote>
-</li>
-<li>布尔值</li>
-<li>空值</li>
-<li>list</li>
-<li>tuple</li>
-<li>set</li>
-<li>dict<blockquote>
-<p>如果key不存在，dict就会报错：要避免key不存在的错误，有两种办法，</p>
-<ul>
-<li>一是通过in判断key是否存在：</li>
-<li>二是通过dict提供的get()方法，如果key不存在，可以返回None，或者自己指定的value：</li>
-<li>要删除一个key，用pop(key)方法，对应的value也会从dict中删除：</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br></pre></td></tr></table></figure>
-<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'Hello, %s'</span> % <span class="string">'world'</span></span><br><span class="line"><span class="string">'Hello, world'</span></span><br><span class="line"><span class="string">'Hi, %s, you have $%d.'</span> % (<span class="string">'Michael'</span>, <span class="number">1000000</span>)</span><br><span class="line"><span class="string">'Hi, Michael, you have $1000000</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'</span>Hello, &#123;<span class="number">0</span>&#125;, 成绩提升了 &#123;<span class="number">1</span>:<span class="number">.1</span>f&#125;%<span class="string">'.format('</span>小明<span class="string">', 17.125)</span></span><br><span class="line"><span class="string">'</span>Hello, 小明, 成绩提升了 <span class="number">17.1</span>%<span class="string">'</span></span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/12/19/总结/Python 总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/19/总结/Python 总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1224,7 +1268,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 kpkym
+    		&copy; 2019 kpkym
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
