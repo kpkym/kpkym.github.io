@@ -137,6 +137,726 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算机网络/2 第二章 物理层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/14/计算机网络/2 第二章 物理层/">物理层</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/14/计算机网络/2 第二章 物理层/" class="archive-article-date">
+  	<time datetime="2017-11-14T09:05:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="物理层的基本概念"><a href="#物理层的基本概念" class="headerlink" title="物理层的基本概念"></a>物理层的基本概念</h1><p>物理层的作用是屏蔽掉传输媒体和通信手段的差异，使数据链路层只需要考虑如何完成本层的协议和服务，而不必考虑网络具体的传输某体和通信手段是什么。用于物理层的协议也常称为物理层的<strong>规程</strong>。</p>
+<blockquote>
+<p>其实物理层规程就是物理层协议。只是在<em>协议</em>这个名词出现之前人们就先使用了<strong>规程</strong>这一名词、</p>
+</blockquote>
+<p>可以将物理层的主要任务描述为确定与传输某体的接口有关的一些特性</p>
+<ul>
+<li><strong>机械特性</strong>：指明接口所用接线器的形状和吃醋才能，引脚数目和排列，固定和锁定装置，等等。平时常见的各种规格的接插件都有严格的标准化的规定。</li>
+<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的电压的范围</li>
+<li><strong>功能特性</strong>：指明某条线上出现的某一电平的电压表示何种意义</li>
+<li><strong>过程特性</strong>：指明度低于不同功能的各种可能时间出现顺序<blockquote>
+<p>数据在计算机中多采用<strong>并行传输</strong>方式。但数据在通信线路(传输媒体)上的传输方式一般都是<strong>串行传输</strong>(这是出于经济上的考虑)，即逐个比特按照时间顺序传输。因此物理层还要完成传输方式的转换。</p>
+</blockquote>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/11/14/计算机网络/2 第二章 物理层/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/14/计算机网络/2 第二章 物理层/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-总结/正则表达式总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/29/总结/正则表达式总结/">正则表达式 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/29/总结/正则表达式总结/" class="archive-article-date">
+  	<time datetime="2017-10-29T15:23:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.cnblogs.com/deerchao/archive/2006/08/24/zhengzhe30fengzhongjiaocheng.html#backreference" target="_blank" rel="noopener">正则表达式30分钟入门教程</a></p>
+<h1 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">元字符</th>
+<th style="text-align:center">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">匹配字母或数字或下划线或汉字</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">匹配任意的空白符</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">匹配数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">匹配字符串的开始</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">匹配字符串的结束</td>
+</tr>
+</tbody>
+</table>
+<h1 id="字符转义"><a href="#字符转义" class="headerlink" title="字符转义"></a>字符转义</h1><p><code>. / * ()</code>  等</p>
+        
+          <a class="article-more-a" href="/2017/10/29/总结/正则表达式总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/正则表达式//" class="article-tag-list-link color1">正则表达式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/29/总结/正则表达式总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-计算机网络/1 第一章 概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/计算机网络/1 第一章 概述/">概述</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/计算机网络/1 第一章 概述/" class="archive-article-date">
+  	<time datetime="2017-10-24T06:09:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>21世纪的一些重要特征就是数字化、网络化和信息化，它是一个以网络为核心的信息时代。这里说的网络是指“三网”： 电信网络、有线电视网络和计算机网络</p>
+<p>计算机网络向用户提供最重要的功能有两个</p>
+<ol>
+<li><strong>连通性</strong></li>
+<li><strong>共享</strong></li>
+</ol>
+<h1 id="因特网概述"><a href="#因特网概述" class="headerlink" title="因特网概述"></a>因特网概述</h1><h2 id="网络的网络"><a href="#网络的网络" class="headerlink" title="网络的网络"></a>网络的网络</h2><p>网络是由若干节点和连接这些节点的链路组成<br>  <strong>网络把许多计算机连接在一起，而因特网则把许多网络连接在一起</strong></p>
+<h2 id="因特网发展的三个阶段"><a href="#因特网发展的三个阶段" class="headerlink" title="因特网发展的三个阶段"></a>因特网发展的三个阶段</h2><h3 id="第一个是-ARPANET"><a href="#第一个是-ARPANET" class="headerlink" title="第一个是 ARPANET"></a>第一个是 ARPANET</h3><p>以小写字母i开始的internet 是一个通用名词，它泛指由多计算机网络互联而成的网络。在这些网络之间的通信协议可以是任意的。<br>以大写字母I开始的Internet 是一个通用名词，它指当前全球最大的、开放的、由众多网络相互连接而成的特定计算机网络，它采用TCP/IP协议族作为通信的规则，其前身是美国的ARPANET</p>
+<h3 id="第二阶段的特点是建成了三级结构的因特网，国家科学基金网，-NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。"><a href="#第二阶段的特点是建成了三级结构的因特网，国家科学基金网，-NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。" class="headerlink" title="第二阶段的特点是建成了三级结构的因特网，国家科学基金网， NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。"></a>第二阶段的特点是建成了三级结构的因特网，国家科学基金网， NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。</h3><h3 id="第三阶段的特点是逐渐形成了多层ISP（Internet-Service-Provider）结构的因特网"><a href="#第三阶段的特点是逐渐形成了多层ISP（Internet-Service-Provider）结构的因特网" class="headerlink" title="第三阶段的特点是逐渐形成了多层ISP（Internet Service Provider）结构的因特网"></a>第三阶段的特点是逐渐形成了多层ISP（Internet Service Provider）结构的因特网</h3><p>根据提供服务的覆盖面积大小以及所拥有的IP地址数目不同，ISP也分成为不同的层次：<strong>主干ISP、地区ISP和本地ISP</strong></p>
+        
+          <a class="article-more-a" href="/2017/10/24/计算机网络/1 第一章 概述/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/计算机网络/1 第一章 概述/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-总结/数据库 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/21/总结/数据库 总结/">数据库 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/21/总结/数据库 总结/" class="archive-article-date">
+  	<time datetime="2017-10-21T06:51:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h1><p><code>SELECT * FROM TABLE;</code><br><code>SELECT DISTINCT COLUMN FROM TABLE;</code><br><code>SELECT * FROM emp WHERE empno IN(1, 2, 3);</code></p>
+<blockquote>
+<ol>
+<li>在IN之中使用NULL —— 在没有任何的影响，</li>
+<li>在NOT NULL之中使用NULL —— 不满足的原因是数据库自身的保护机制，避免大数据所带来的问题。</li>
+</ol>
+</blockquote>
+        
+          <a class="article-more-a" href="/2017/10/21/总结/数据库 总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/21/总结/数据库 总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/11. 部署Web应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/">11. 部署Web应用</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/" class="archive-article-date">
+  	<time datetime="2017-09-21T14:30:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>服务器不能得到一个WEB_INF 或 META_INF 下的文件，会响应一个 404 NOT FOUND</strong></p>
+<h1 id="欢迎文件"><a href="#欢迎文件" class="headerlink" title="欢迎文件"></a>欢迎文件</h1><p>如果请求一个路径的话，会找到这个路径下面的默认欢迎文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>不能有/</strong></p>
+        
+          <a class="article-more-a" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/08. 无脚本的JSP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/">08. 无脚本的JSP</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/" class="archive-article-date">
+  	<time datetime="2017-09-16T08:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>[] 比 .  ${requestScope[“foo.person”].name }</li>
+<li>[]可以使用命名不规范的对象</li>
+<li>[]可以访问数组和List，并且可以做任意层次的嵌套，只要你受得了</li>
+</ul>
+<h1 id="include指令在转换时发生-lt-include-gt-标准动作在运行时发生"><a href="#include指令在转换时发生-lt-include-gt-标准动作在运行时发生" class="headerlink" title="include指令在转换时发生 / &lt;%@ include%&gt;标准动作在运行时发生"></a>include指令在转换时发生 / <code>&lt;%@ include%&gt;</code>标准动作在运行时发生</h1><p>如果使用include指令，这与你打开JSP页面，并粘贴上“Header.jsp”的内容没有两样。换句话说，这样就好像你把页眉文件的代码重复放在其他JSP中一样。只不过，容器会在转换时为你完成这个工作，所以你不必亲自到处复制代码。你的任务只是编写页面，其中包括一个include指令，其他的任务则由容器负责，它要在转换之前把页眉代码复制到每个JSP中,再编译为生成的servlet.</p>
+<p><code>&lt;jsp:include&gt;</code>则完全不同。它不是从“Header.jsp”复制源代码，include标准动作会在运行时插人“Header.jsp”的响应。<code>&lt;jsp:include&gt;</code>的关键是，容器要根据页面并应用include0方法。所分派/包含的(page) 属性创建一个RequestDispatcher,JSP针对同样的请求和响应对象执行，而且在同一个线程中运行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/07. JSP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/Head First Servlets and JSP/07. JSP/">07. JSP</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/11/Head First Servlets and JSP/07. JSP/" class="archive-article-date">
+  	<time datetime="2017-09-11T15:41:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="容器如何处理JSP"><a href="#容器如何处理JSP" class="headerlink" title="容器如何处理JSP"></a>容器如何处理JSP</h1><ol>
+<li>查看指令,得到转换时可能需要的信息。</li>
+<li>创建一个HttpServlet子类。<blockquote>
+<p>对于Tomcat5,所生成的servlet 会扩展: <code>org.apache.jasper.runtime.HttpJspBase</code></p>
+</blockquote>
+</li>
+<li>如果一个page指令有import属性，它会在类文件的最上面(package语句下面)写import语句。<br>对于Tomcat 5,package语句(你不用操心) 是: <code>package org.apache.jsp</code>;</li>
+<li>如果有声明，容器将这些声明写到类文件中，通常放在类声明下面，并在服务方法前面。Tomcat5声明了自己的一个静态变量和一个实例方法。</li>
+<li>建立服务方法。服务方法的具体方法名是<code>_jspService()</code>。<code>_jspService()</code>由servlet超类被覆盖的<code>service()</code>方法调用，要接收<code>HttpServletRequest</code> 和<code>HttpServletResponse</code> 参数在建立这个方法时，容器会声明并初始化所有隐式对象</li>
+<li>将曾通的HTML (称为模板文本).scriptlet和表达式放到服务方法中，完成格式化，并写至PrintWriter响应输出。</li>
+</ol>
+        
+          <a class="article-more-a" href="/2017/09/11/Head First Servlets and JSP/07. JSP/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/11/Head First Servlets and JSP/07. JSP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/06. 会话管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/">06. 会话管理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/" class="archive-article-date">
+  	<time datetime="2017-09-08T16:59:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h1><ul>
+<li>在写至响应的HTML中，URL重写把会话ID增加到其中所有URL的最后。</li>
+<li>会话ID作为请求URL最后的“额外”信息再通过请求返回</li>
+<li>如果客户不接受cookie,URL重写会自动发生，但是必须显式地对所有URL编码。</li>
+<li>要对一个URL编码，需要调用response. encodeURL(String)。</li>
+<li><code>out.println(&quot;&lt;a href=&#39;&quot; + response.encodeURL(&quot;/BeerTest.do&quot;) + &quot;&#39;&gt;click  me&lt;/a &gt;&quot;)</code> ;</li>
+<li>没有办法对静态页面完成自动的URL 重写，所以，如果你依赖于会话，就必须使用动态生成的页面。</li>
+<li>重定向 <code>response.encodeRedirectURL(&quot;res.jsp&quot;)</code>;</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Head First Servlets and JSP/05. 属性和监听者" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -217,58 +937,33 @@
 
 
   
-    <article id="post-Head First Servlets and JSP/04. 请求和响应" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式/状态模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/Head First Servlets and JSP/04. 请求和响应/">04. 请求和响应</a>
+      <a class="article-title" href="/2017/08/17/设计模式/状态模式/">状态模式</a>
     </h1>
   
 
         
-        <a href="/2017/08/17/Head First Servlets and JSP/04. 请求和响应/" class="archive-article-date">
-  	<time datetime="2017-08-17T11:29:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-17</time>
+        <a href="/2017/08/17/设计模式/状态模式/" class="archive-article-date">
+  	<time datetime="2017-08-17T12:31:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="生命周期的三大重要时刻"><a href="#生命周期的三大重要时刻" class="headerlink" title="生命周期的三大重要时刻"></a>生命周期的三大重要时刻</h1><table>
-<thead>
-<tr>
-<th>&nbsp;</th>
-<th><code>init()</code></th>
-<th><code>service()</code></th>
-<th><code>doGet()</code> 和<code>doPost()</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>何时调用</td>
-<td>servlet实例创建后，并在servlet能为客户请求提供服务之前，容器要对servlet调用<code>init()</code></td>
-<td>第一个客户请求到来时，容器会开始一个新线程，或者从线程池分配一个线程，并调用servlet的<code>service()</code>方法。</td>
-<td><code>service()</code>方法根据请求的HTTP方法(GET.POST等) 来调用<code>doGet()</code>或<code>doPost()</code>。(这里只列出了<code>doGet()</code>和<code>doPost()</code>,因为你可能只会用到这两个方法)。</td>
-</tr>
-<tr>
-<td>作用</td>
-<td>使你在servlet处理客户请求之前有机会对共初始化。</td>
-<td>这个方法会查看请求，确定HTTP方法(GET.POST等)，并在servlet 上调用对应的方法，如<code>doGet()</code>、<code>doPost()</code>等。</td>
-<td>要在这里写你的代码! 你的Web应用想要做什么，就要由这个方法负责。当然，也可以调用其他对象的其他方法，不过都要从这里开始。</td>
-</tr>
-<tr>
-<td>是否覆盖</td>
-<td>有可能。 如果有初始化代码(如得到一个数据库连接，或向其他对象注册)，就要覆盖servlet 类中的<code>init()</code>方法。</td>
-<td>不太可能。不应该覆盖<code>service()</code>方法。你的任务是覆盖<code>doGet()</code>和/或<code>doPost()</code>方法，而由HTTPServlet中的<code>service()</code>实现来考虑该调用哪一个方法(<code>doGet()</code>.<code>doPost()</code>等)。</td>
-<td>至少要覆盖其中之一! (<code>doGet()</code>或<code>doPost()</code>)。不论覆盖哪一个，都能告诉容器你支持什么类型的请求。例如，如果没有覆盖<code>doPost()</code>，就是在告诉容器这个servlet 不支持HTTP POST 请求。</td>
-</tr>
-</tbody>
-</table>
+        <h1 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h1><blockquote>
+<p>允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它的类。</p>
+</blockquote>
+<p><a href="http://www.runoob.com/design-pattern/state-pattern.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2014/08/state_pattern_uml_diagram.jpg" alt></p>
         
-          <a class="article-more-a" href="/2017/08/17/Head First Servlets and JSP/04. 请求和响应/#more">more >></a>
+          <a class="article-more-a" href="/2017/08/17/设计模式/状态模式/#more">more >></a>
         
       
 
@@ -277,13 +972,24 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        			<a href="/categories/设计模式//" class="article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
@@ -292,84 +998,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/17/Head First Servlets and JSP/04. 请求和响应/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Head First Servlets and JSP/02. WEB应用体系结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/15/Head First Servlets and JSP/02. WEB应用体系结构/">WEB应用体系结构</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/15/Head First Servlets and JSP/02. WEB应用体系结构/" class="archive-article-date">
-  	<time datetime="2017-08-15T13:21:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>Servlet也需要帮助。请求到来时，必须有人实例化servlet,或者至少要建一个新的线程处理这个请求，必须有人调用servlet的<code>doPost()</code>或<code>doGet()</code>方法。另外，对了，那些方法还有一些重要的参数一一HTTP请求和HTTP响应对象，所以必须有人把请求和响应交给servlet.还得有人管理servlet的生与死以及servlet的资源。这个“人”就是Web容器。</p>
-<p>Tomcat就是这样一个容器。如果Web服务器应用(如Apache)得到一个指向某servlet的请求(面不是其他请求，如请求一个普通的静态HTML页面)，此时服务器不是把这个请求交阶servlel本身，面是交给部署该servlet的容器。当由容器向servlet提供HTTP请求和响应。而且要由容器调用servlet的方法，如<code>doPost()</code>或<code>doGet()</code>。</p>
-        
-          <a class="article-more-a" href="/2017/08/15/Head First Servlets and JSP/02. WEB应用体系结构/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/15/Head First Servlets and JSP/02. WEB应用体系结构/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/08/17/设计模式/状态模式/">展开全文 >></a>
         </p>
       
 
@@ -401,7 +1030,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 

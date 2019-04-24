@@ -137,6 +137,262 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-总结/docker 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/01/总结/docker 总结/" class="archive-article-date">
+  	<time datetime="2018-12-01T08:36:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>UnionFS（联合文件系统）：Union文件系统（UnionFS）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)。Union 文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像。</p>
+</blockquote>
+<p>特性：一次同时加载多个文件系统，但从外面看起来，只能看到一个文件系统，联合加载会把各层文件系统叠加起来，这样最终的文件系统会包含所有底层的文件和目录</p>
+<h1 id="Docker镜像加载原理："><a href="#Docker镜像加载原理：" class="headerlink" title="Docker镜像加载原理："></a>Docker镜像加载原理：</h1><p>docker的镜像实际上由一层一层的文件系统组成，这种层级的文件系统UnionFS。<br>bootfs(boot file system)主要包含bootloader和kernel, bootloader主要是引导加载kernel, Linux刚启动时会加载bootfs文件系统，在Docker镜像的最底层是bootfs。这一层与我们典型的Linux/Unix系统是一样的，包含boot加载器和内核。当boot加载完成之后整个内核就都在内存中了，此时内存的使用权已由bootfs转交给内核，此时系统也会卸载bootfs。</p>
+<blockquote>
+<p>rootfs (root file system) ，在bootfs之上。包含的就是典型 Linux 系统中的 /dev, /proc, /bin, /etc 等标准目录和文件。rootfs就是各种不同的操作系统发行版，比如Ubuntu，Centos等等。<br>。 </p>
+</blockquote>
+<p>平时我们安装进虚拟机的CentOS都是好几个G，为什么docker这里才200M？？</p>
+<blockquote>
+<p>对于一个精简的OS，rootfs可以很小，只需要包括最基本的命令、工具和程序库就可以了，因为底层直接用Host的kernel，自己只需要提供 rootfs 就行了。由此可见对于不同的linux发行版, bootfs基本是一致的, rootfs会有差别, 因此不同的发行版可以公用bootfs。</p>
+</blockquote>
+<h1 id="为什么-Docker-镜像要采用这种分层结构呢"><a href="#为什么-Docker-镜像要采用这种分层结构呢" class="headerlink" title="为什么 Docker 镜像要采用这种分层结构呢"></a>为什么 Docker 镜像要采用这种分层结构呢</h1><p>最大的一个好处就是 - 共享资源</p>
+<blockquote>
+<p>比如：有多个镜像都从相同的 base 镜像构建而来，那么宿主机只需在磁盘上保存一份base镜像，<br>同时内存中也只需加载一份 base 镜像，就可以为所有容器服务了。而且镜像的每一层都可以被共享。</p>
+</blockquote>
+<p><strong>Docker镜像都是只读的</strong><br>当容器启动时，一个新的可写层被加载到镜像的顶部。<br>这一层通常被称作“容器层”，“容器层”之下的都叫“镜像层”。</p>
+<ol>
+<li>docker commit提交容器副本使之成为一个新的镜像</li>
+<li>docker commit -m=“提交的描述信息” -a=“作者” 容器ID 要创建的目标镜像名:[标签名]</li>
+</ol>
+<p>Docker解决了运行环境和配置问题软件容器，方便做持续集成并有助于整体发布的容器虚拟化技术。</p>
+<blockquote>
+<p>由于前面虚拟机存在这些缺点，Linux 发展出了另一种虚拟化技术：Linux 容器（Linux Containers，缩写为 LXC）。<br>Linux 容器不是模拟一个完整的操作系统，而是对进程进行隔离。有了容器，就可以将软件运行所需的所有资源打包到一个隔离的容器中。容器与虚拟机不同，不需要捆绑一整套操作系统，只需要软件工作所需的库资源和设置。系统因此而变得高效轻量并保证部署在任何环境中的软件都能始终如一地运行。</p>
+</blockquote>
+<h1 id="比较了-Docker-和传统虚拟化方式的不同之处："><a href="#比较了-Docker-和传统虚拟化方式的不同之处：" class="headerlink" title="比较了 Docker 和传统虚拟化方式的不同之处："></a>比较了 Docker 和传统虚拟化方式的不同之处：</h1><ul>
+<li>传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；</li>
+<li>而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</li>
+<li>每个容器之间互相隔离，每个容器有自己的文件系统 ，容器之间进程不会相互影响，能区分计算资源。</li>
+</ul>
+<h1 id="Docker是怎么工作的"><a href="#Docker是怎么工作的" class="headerlink" title="Docker是怎么工作的:"></a>Docker是怎么工作的:</h1><blockquote>
+<p>Docker是一个Client-Server结构的系统，Docker守护进程运行在主机上， 然后通过Socket连接从客户端访问，守护进程从客户端接受命令并管理运行在主机上的容器。 容器，是一个运行时环境，就是我们前面说到的集装箱。</p>
+</blockquote>
+<h2 id="为什么Docker比较比VM快"><a href="#为什么Docker比较比VM快" class="headerlink" title="为什么Docker比较比VM快"></a>为什么Docker比较比VM快</h2><ol>
+<li>docker有着比虚拟机更少的抽象层。由亍docker不需要Hypervisor实现硬件资源虚拟化,运行在docker容器上的程序直接使用的都是实际物理机的硬件资源。因此在CPU、内存利用率上docker将会在效率上有明显优势。</li>
+<li>docker利用的是宿主机的内核,而不需要Guest OS。因此,当新建一个容器时,docker不需要和虚拟机一样重新加载一个操作系统内核。仍而避免引寻、加载操作系统内核返个比较费时费资源的过程,当新建一个虚拟机时,虚拟机软件需要加载Guest OS,返个新建过程是分钟级别的。而docker由于直接利用宿主机的操作系统,则省略了返个过程,因此新建一个docker容器只需要几秒钟。</li>
+</ol>
+<p>帮助命令<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info</span><br><span class="line">docker --help</span><br></pre></td></tr></table></figure></p>
+<p>镜像命令<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker search 某个XXX镜像名字</span><br><span class="line"></span><br><span class="line">docker pull 某个XXX镜像名字</span><br><span class="line">docker pull 镜像名字[:TAG]</span><br><span class="line"></span><br><span class="line">docker rmi 某个XXX镜像名字ID</span><br><span class="line">docker rmi  -f 镜像ID</span><br><span class="line">docker rmi -f 镜像名1:TAG 镜像名2:TAG </span><br><span class="line">docker rmi -f $(docker images -qa)</span><br></pre></td></tr></table></figure></p>
+<p>exit 退出交互式界面，容器停止运行<br>Crtl+P 或者Crtl+Q 退出交互式界面，容器在后台运行。(注意是大写P和Q)</p>
+<p>容器操作<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker create 容器名或者容器ID 创建容器</span><br><span class="line">docker start [-i] 容器名       启动容器</span><br><span class="line">docker run 容器名或者容器ID    运行容器，相当于docker create + docker start</span><br><span class="line">docker attach 容器名或者容器ID 进入容器的命令行</span><br><span class="line">docker stop 容器名                             停止容器</span><br><span class="line">docker rm 容器名                               删除容器</span><br><span class="line"></span><br><span class="line">docker top 容器名          查看WEB应用程序容器的进程</span><br><span class="line">docker inspect 容器名 查看Docker的底层信息</span><br></pre></td></tr></table></figure></p>
+<p>守护式容器<br>我们可以使用守护式容器运行一个或者多个服务，例如运行lamp服务、redis服务、mysql服务等。</p>
+<p>什么是守护式容器？</p>
+<ul>
+<li>能够长期运行</li>
+<li>没有交互式会话</li>
+<li>适合运行应用程序和服务</li>
+<li>启动守护式容器：</li>
+</ul>
+<p>docker run -d IMAGE [COMMOND] [ARG…]</p>
+<blockquote>
+<p><a href="https://webkul.com/blog/docker-container-will-automatically-stop-run/" target="_blank" rel="noopener">https://webkul.com/blog/docker-container-will-automatically-stop-run/</a><br>Docker Container stopped automatically after starting. You can check exit code of container if it is 0 means container exited after all exection, means you have to run the process in foreground to keep container running</p>
+</blockquote>
+<h1 id="Docker容器数据卷"><a href="#Docker容器数据卷" class="headerlink" title="Docker容器数据卷"></a>Docker容器数据卷</h1><blockquote>
+<p>卷就是目录或文件，存在于一个或多个容器中，由docker挂载到容器，但不属于联合文件系统，因此能够绕过Union File System提供一些用于持续存储或共享数据的特性：<br>卷的设计目的就是数据的持久化，完全独立于容器的生存周期，因此Docker不会在容器删除时删除其挂载的数据卷</p>
+</blockquote>
+<p><strong>特点：</strong></p>
+<ol>
+<li>数据卷可在容器之间共享或重用数据</li>
+<li>卷中的更改可以直接生效</li>
+<li>数据卷中的更改不会包含在镜像的更新中</li>
+<li>数据卷的生命周期一直持续到没有容器使用它为止</li>
+</ol>
+<p>命令</p>
+<blockquote>
+<p>docker run -it -v /宿主机目录:/容器内目录 centos /bin/bash</p>
+</blockquote>
+<p>查看数据卷是否挂载成功</p>
+<blockquote>
+<p>docker inspect 容器ID</p>
+</blockquote>
+<p>命令(带权限)</p>
+<blockquote>
+<p>docker run -it -v /宿主机绝对路径目录:/容器内目录:ro 镜像名</p>
+</blockquote>
+<p>DockerFile添加</p>
+<blockquote>
+<p>根目录下新建mydocker文件夹并进入<br><code>VOLUME[&quot;/dataVolumeContainer&quot;,&quot;/dataVolumeContainer2&quot;,&quot;/dataVolumeContainer3&quot;]</code></p>
+</blockquote>
+<p>说明：</p>
+<blockquote>
+<p>出于可移植和分享的考虑，用-v 主机目录:容器目录这种方法不能够直接在Dockerfile中实现。由于宿主机目录是依赖于特定宿主机的，并不能够保证在所有的宿主机上都存在这样的特定目录。</p>
+</blockquote>
+<h1 id="File构建"><a href="#File构建" class="headerlink" title="File构建"></a>File构建</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># volume test</span><br><span class="line">FROM centos</span><br><span class="line">VOLUME ["/dataVolumeContainer1","/dataVolumeContainer2"]</span><br><span class="line">CMD echo "finished,--------success1"</span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure>
+<h2 id="容器间传递共享-–volumes-from"><a href="#容器间传递共享-–volumes-from" class="headerlink" title="容器间传递共享(–volumes-from)"></a>容器间传递共享(–volumes-from)</h2><blockquote>
+<p>结论：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止</p>
+</blockquote>
+<h1 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h1><blockquote>
+<p>Dockerfile是用来构建Docker镜像的构建文件，是由一系列命令和参数构成的脚本。</p>
+</blockquote>
+<h2 id="构建三步骤"><a href="#构建三步骤" class="headerlink" title="构建三步骤"></a>构建三步骤</h2><ol>
+<li>编写Dockerfile文件</li>
+<li>docker build</li>
+<li>docker run</li>
+</ol>
+<h2 id="DockerFile构建过程解析"><a href="#DockerFile构建过程解析" class="headerlink" title="DockerFile构建过程解析"></a>DockerFile构建过程解析</h2><h3 id="Dockerfile内容基础知识"><a href="#Dockerfile内容基础知识" class="headerlink" title="Dockerfile内容基础知识"></a>Dockerfile内容基础知识</h3><ol>
+<li>每条保留字指令都必须为大写字母且后面要跟随至少一个参数</li>
+<li>指令按照从上到下，顺序执行</li>
+<li>#表示注释</li>
+<li>每条指令都会创建一个新的镜像层，并对镜像进行提交</li>
+</ol>
+<h3 id="Docker执行Dockerfile的大致流程"><a href="#Docker执行Dockerfile的大致流程" class="headerlink" title="Docker执行Dockerfile的大致流程"></a>Docker执行Dockerfile的大致流程</h3><ol>
+<li>docker从基础镜像运行一个容器</li>
+<li>执行一条指令并对容器作出修改</li>
+<li>执行类似docker commit的操作提交一个新的镜像层</li>
+<li>docker再基于刚提交的镜像运行一个新容器</li>
+<li>执行dockerfile中的下一条指令直到所有指令都执行完成</li>
+</ol>
+<p>从应用软件的角度来看，Dockerfile、Docker镜像与Docker容器分别代表软件的三个不同阶段，</p>
+<ul>
+<li>Dockerfile是软件的原材料</li>
+<li>Docker镜像是软件的交付品</li>
+<li>Docker容器则可以认为是软件的运行态。</li>
+</ul>
+<blockquote>
+<p>Dockerfile面向开发，Docker镜像成为交付标准，Docker容器则涉及部署与运维，三者缺一不可，合力充当Docker体系的基石。</p>
+</blockquote>
+<ol>
+<li>Dockerfile，需要定义一个Dockerfile，Dockerfile定义了进程需要的一切东西。Dockerfile涉及的内容包括执行代码或者是文件、环境变量、依赖包、运行时环境、动态链接库、操作系统的发行版、服务进程和内核进程(当应用进程需要和系统服务和内核进程打交道，这时需要考虑如何设计namespace的权限控制)等等;</li>
+<li>Docker镜像，在用Dockerfile定义一个文件之后，docker build时会产生一个Docker镜像，当运行 Docker镜像时，会真正开始提供服务;</li>
+<li>Docker容器，容器是直接提供服务的。</li>
+</ol>
+<h1 id="DockerFile体系结构-保留字指令"><a href="#DockerFile体系结构-保留字指令" class="headerlink" title="DockerFile体系结构(保留字指令)"></a>DockerFile体系结构(保留字指令)</h1><ol>
+<li>FROM<blockquote>
+<p>基础镜像，当前新镜像是基于哪个镜像的</p>
+</blockquote>
+</li>
+<li>MAINTAINER<blockquote>
+<p>镜像维护者的姓名和邮箱地址</p>
+</blockquote>
+</li>
+<li>RUN<blockquote>
+<p>容器构建时需要运行的命令</p>
+</blockquote>
+</li>
+<li>EXPOSE<blockquote>
+<p>当前容器对外暴露出的端口</p>
+</blockquote>
+</li>
+<li>WORKDIR<blockquote>
+<p>指定在创建容器后，终端默认登陆的进来工作目录，一个落脚点</p>
+</blockquote>
+</li>
+<li>ENV<blockquote>
+<p>用来在构建镜像过程中设置环境变量</p>
+</blockquote>
+</li>
+<li>ADD<blockquote>
+<p>将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包</p>
+</blockquote>
+</li>
+<li>COPY<blockquote>
+<p>类似ADD，拷贝文件和目录到镜像中。<br>将从构建上下文目录中 &lt;源路径&gt; 的文件/目录复制到新的一层的镜像内的 &lt;目标路径&gt; 位置</p>
+</blockquote>
+</li>
+<li>VOLUME<blockquote>
+<p>容器数据卷，用于数据保存和持久化工作</p>
+</blockquote>
+</li>
+<li>CMD<blockquote>
+<p>指定一个容器启动时要运行的命令<br>Dockerfile 中可以有多个 CMD 指令，但只有最后一个生效，CMD 会被 docker run 之后的参数替换</p>
+</blockquote>
+</li>
+<li>ENTRYPOINT <blockquote>
+<p>指定一个容器启动时要运行的命令<br>ENTRYPOINT 的目的和 CMD 一样，都是在指定容器启动程序及参数</p>
+</blockquote>
+</li>
+<li>ONBUILD<blockquote>
+<p>当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发</p>
+</blockquote>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Docker//" class="article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/01/总结/docker 总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机网络/6 第六章 应用层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -246,6 +502,104 @@
 
 
   
+    <article id="post-总结/Redis 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/25/总结/Redis 总结/" class="archive-article-date">
+  	<time datetime="2018-03-25T08:33:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>config set password ‘123456’</li>
+<li>auth 123456</li>
+</ul>
+<p><strong>ps -ef|grep redis</strong></p>
+<ul>
+<li>select 切换数据库</li>
+<li>dbsize 常看当前数据库的key的数量</li>
+<li>flushdb 清空当前数据库</li>
+<li>flushall 清空全部数据库</li>
+<li>统一密码管理，16个库都是同样密码</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/03/25/总结/Redis 总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Redis//" class="article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/25/总结/Redis 总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机网络/5 第五章 运输层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -302,6 +656,169 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/17/计算机网络/5 第五章 运输层/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-总结/Linux" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/01/总结/Linux/">Linux 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/01/总结/Linux/" class="archive-article-date">
+  	<time datetime="2018-03-01T02:12:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-系统启动过程"><a href="#Linux-系统启动过程" class="headerlink" title="Linux 系统启动过程"></a>Linux 系统启动过程</h1><ol>
+<li>内核的引导。<blockquote>
+<p>当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。<br>操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。</p>
+</blockquote>
+</li>
+<li>运行 init。<blockquote>
+<p>init 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。<br>init 程序首先是需要读取配置文件 /etc/inittab。</p>
+</blockquote>
+</li>
+<li>系统初始化。<blockquote>
+<p>许多程序需要开机启动。它们在Windows叫做”服务”（service），在Linux就叫做”守护进程”（daemon）。<br>init进程的一大任务，就是去运行这些开机启动的程序。<br>但是，不同的场合需要启动不同的程序，比如用作服务器时，需要启动Apache，用作桌面就不需要。<br>Linux允许为不同的场合，分配不同的开机启动程序，这就叫做”运行级别”（runlevel）。也就是说，启动时根据”运行级别”，确定要运行哪些程序。</p>
+<blockquote>
+<p>Linux系统有7个运行级别(runlevel)：<br>运行级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动<br>运行级别1：单用户工作状态，root权限，用于系统维护，禁止远程登陆<br>运行级别2：多用户状态(没有NFS)<br>运行级别3：完全的多用户状态(有NFS)，登陆后进入控制台命令行模式<br>运行级别4：系统未使用，保留<br>运行级别5：X11控制台，登陆后进入图形GUI模式<br>运行级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</p>
+</blockquote>
+</blockquote>
+</li>
+<li>建立终端 。</li>
+<li>用户登录系统。</li>
+</ol>
+<p>运行级别说明:<br>0 :关机<br>1 :单用户【找回丢失密码】 2:多用户状态没有网络服务<br>3:多用户状态有网络服务<br>4:系统未使用保留给用户<br>5:图形界面<br>6:系统重启<br>常用运行级别是 3 和 5 ，要修改默认的运行级别可改文件 /etc/inittab 的 id:5:initdefault:这一行中的数字</p>
+<p>强制覆盖不提示的方法:\cp</p>
+<h1 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h1><p>-e 编辑  |  -l 查询  | -r 删除</p>
+<ol>
+<li>cron -e</li>
+<li>*/1<em>**</em>ls-l/etc&gt;&gt;/tmp/to.txt</li>
+<li>当保存退出后就程序。</li>
+<li>在每一分钟都会自动的调用 ls -l /etc &gt;&gt; /tmp/to.txt</li>
+</ol>
+<p>分 时 日 月 星期 要运行的命令</p>
+<p>第1列分钟0～59<br>第2列小时0～23（0表示子夜）<br>第3列日1～31<br>第4列月1～12<br>第5列星期0～7（0和7表示星期天）<br>第6列要运行的命令</p>
+<p>minute   hour   day   month   week   command</p>
+<p>其中：</p>
+<p>minute： 表示分钟，可以是从0到59之间的任何整数。</p>
+<p>hour：表示小时，可以是从0到23之间的任何整数。</p>
+<p>day：表示日期，可以是从1到31之间的任何整数。</p>
+<p>month：表示月份，可以是从1到12之间的任何整数。</p>
+<p>week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。</p>
+<p>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</p>
+<p>在以上各个字段中，还可以使用以下特殊字符：</p>
+<p>星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</p>
+<p>逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</p>
+<p>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</p>
+<p>正斜线（/）$$：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</p>
+<h1 id="SCSI"><a href="#SCSI" class="headerlink" title="SCSI"></a>SCSI</h1><p>2)对于 IDE 硬盘，驱动器标识符为“hdx~”,其中“hd”表明分区所在设备的类型，这里是指 IDE 硬 盘了。“x”为盘号(a 为基本盘，b 为基本从属盘，c 为辅助主盘，d 为辅助从属盘),“~”代表分区， 前四个分区用数字 1 到 4 表示，它们是主分区或扩展分区，从 5 开始就是逻辑分区。例，hda3 表示为 第一个 IDE 硬盘上的第三个主分区或扩展分区,hdb2 表示为第二个 IDE 硬盘上的第二个主分区或扩展 分区。<br>3)对于 SCSI 硬盘则标识为“sdx~”，SCSI 硬盘是用“sd”来表示分区所在设备的类型的，其余则 和 IDE 硬盘的表示方法一样。</p>
+<p> 如何增加一块硬盘<br>1)虚拟机添加硬盘<br>2)分区 fdisk /dev/sdb<br>3)格式化 mkfs -t ext4 /dev/sdb1<br>4)挂载 先创建一个 /home/newdisk , 挂载 mount /dev/sdb1 /home/newdisk 5)设置可以自动挂载(永久挂载，当你重启系统，仍然可以挂载到 /home/newdisk) 。<br>   vim /etc/fstab<br>/dev/sdb1 /home/newdisk ext4 defaults 0 0</p>
+<p>查询系统整体磁盘使用情况 df -lh</p>
+<p>查看服务名<br>方式 1:使用 setup -&gt; 系统服务 就可以看到。<br>方式 2: /etc/init.d/服务名称</p>
+<p>查看或者修改默认级别: vi /etc/inittab<br>Linux 系统有 7 种运行级别(runlevel):常用的是级别 3 和 5<br>•运行级别 0:系统停机状态，系统默认运行级别不能设为 0，否则不能正常启动 •运行级别 1:单用户工作状态，root 权限，用于系统维护，禁止远程登陆 •运行级别 2:多用户状态(没有 NFS)，不支持网络<br>•运行级别 3:完全的多用户状态(有 NFS)，登陆后进入控制台命令行模式 •运行级别 4:系统未使用，保留<br>•运行级别 5:X11 控制台，登陆后进入图形 GUI 模式<br>•运行级别 6:系统正常关闭并重启，默认运行级别不能设为 6，否则不能正常启动</p>
+<p>通过 chkconfig 命令可以给每个服务的各个运行级别设置自启动/关闭</p>
+<p>查看系统网络情况 netstat<br>-an 按一定顺序排列输出 -p 显示哪个进程在调用</p>
+<h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>1) 脚本以#!/bin/bash 开头<br>2) 脚本需要有可执行权限</p>
+<p>17.4.1 Shell 的变量的介绍<br>1)Linux Shell 中的变量分为，系统变量和用户自定义变量。 2)系统变量:$HOME、$PWD、$SHELL、$USER 等等<br>比如: echo $HOME 等等..<br>3)显示当前 shell 中所有变量:set</p>
+<p>单引号字符串的限制：</p>
+<p>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；<br>单引号字串中不能出现单独一个的单引号（对单引号使用转义符后也不行），但可成对出现，作为字符串拼接使用。</p>
+<p>双引号的优点：</p>
+<p>双引号里可以有变量<br>双引号里可以出现转义字符</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">获取字符串长度</span><br><span class="line">string=<span class="string">"abcd"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#string&#125;</span> <span class="comment">#输出 4</span></span><br><span class="line"></span><br><span class="line">提取子字符串</span><br><span class="line">以下实例从字符串第 2 个字符开始截取 4 个字符：</span><br><span class="line"></span><br><span class="line">string=<span class="string">"runoob is a great site"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;string:1:4&#125;</span> <span class="comment"># 输出 unoo</span></span><br><span class="line"></span><br><span class="line">查找子字符串</span><br><span class="line">查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)：</span><br><span class="line"></span><br><span class="line">string=<span class="string">"runoob is a great site"</span></span><br><span class="line"><span class="built_in">echo</span> `expr index <span class="string">"<span class="variable">$string</span>"</span> io`  <span class="comment"># 输出 4</span></span><br></pre></td></tr></table></figure>
+<p>定义数组<br>在 Shell 中，用括号来表示数组，数组元素用”空格”符号分割开。定义数组的一般形式为：</p>
+<p>数组名=(值1 值2 … 值n)</p>
+<p>读取数组<br>读取数组元素值的一般格式是：</p>
+<p>${数组名[下标]}</p>
+<p>使用 @ 符号可以获取数组中的所有元素，例如：</p>
+<p>echo ${array_name[@]}</p>
+<p>获取数组的长度<br>获取数组长度的方法与获取字符串长度的方法相同，例如：</p>
+<p>17.6 位置参数变量 17.6.1 介绍<br>当我们执行一个 shell 脚本时，如果希望获取到命令行的参数信息，就可以使用到位置参数变 量，比如 : ./myshell.sh 100 200 , 这个就是一个执行 shell 的命令行，可以在 myshell 脚本中获取到 参数信息<br>17.6.2 基本语法<br>$n (功能描述:n 为数字，$0 代表命令本身，$1-$9 代表第一到第九个参数，十以上的参数，十 以上的参数需要用大括号包含，如${10})<br>$<em> (功能描述:这个变量代表命令行中所有的参数，$</em>把所有的参数看成一个整体) $@(功能描述:这个变量也代表命令行中所有的参数，不过$@把每个参数区分对待) $#(功能描述:这个变量代表命令行中所有参数的个数)</p>
+<p>17.7 预定义变量 17.7.1 基本介绍<br>就是 shell 设计者事先已经定义好的变量，可以直接在 shell 脚本中使用 17.7.2 基本语法<br>$$ (功能描述:当前进程的进程号(PID))<br>$! (功能描述:后台运行的最后一个进程的进程号(PID))<br>$? (功能描述:最后一次执行的命令的返回状态。如果这个变量的值为 0，证明上一个命令<br>正确执行;如果这个变量的值为非 0(具体是哪个数，由命令自己来决定)，则证明上一个命令 执行不正确了。)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 取得数组元素的个数</span></span><br><span class="line">length=$&#123;#array_name[@]&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">length=$&#123;#array_name[*]&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取得数组单个元素的长度</span></span><br><span class="line">lengthn=$&#123;#array_name[n]&#125;</span><br></pre></td></tr></table></figure>
+<p>多行注释<br>多行注释还可以使用以下格式：</p>
+<p>:&lt;&lt;EOF<br>注释内容…<br>注释内容…<br>注释内容…<br>EOF<br>EOF 也可以使用其他符号:</p>
+<p>:&lt;&lt;’<br>注释内容…<br>注释内容…<br>注释内容…<br>‘</p>
+<p>:&lt;&lt;!<br>注释内容…<br>注释内容…<br>注释内容…<br>!</p>
+<p><code></code></p>
+<p>•基本语法<br>1)定义变量:变量=值<br>2)撤销变量:unset 变量<br>1) 声明静态变量:readonly 变量，注意:不能 unset</p>
+<p>•将命令的返回值赋给变量(重点)<br>1)A=<code>ls -la</code> 反引号，运行里面的命令，并把结果返回给变量 A<br>2)A=$(ls -la) 等价于反引号</p>
+<p>1) export 变量名=变量值 (功能描述:将 shell 变量输出为环境变量)<br>2) source 配置文件 (功能描述:让修改后的配置信息立即生效)<br>3) echo $变量名 (功能描述:查询环境变量的值)</p>
+<p> 17.8 运算符 17.8.1 基本介绍<br>学习如何在 shell 中进行各种运算操作。 17.8.2 基本语法<br>更多 Java –大数据 –前端 –python 人工智能资料下载，可访问百度:尚硅谷官网<br>第 135页</p>
+<p> 尚硅谷 Linux 课程<br> 1) “$((运算式))”或“$[运算式]” 2) expr m + n<br>注意 expr 运算符间要有空格 3) expr m - n<br>4) expr *, /, % 乘，除，取余</p>
+<p>判断语句<br>17.9.1 •基本语法<br><a href="注意 condition 前后要有空格"> condition </a></p>
+<p>#非空返回 true，可使用$?验证(0 为 true，&gt;1 为 false)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/01/总结/Linux/">展开全文 >></a>
         </p>
       
 
@@ -426,6 +943,96 @@
 
 
   
+    <article id="post-总结/JavaScript 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/05/总结/JavaScript 总结/">JavaScript 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/05/总结/JavaScript 总结/" class="archive-article-date">
+  	<time datetime="2018-02-05T08:20:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>启用strict模式的方法是在JavaScript代码的第一行写上：</p>
+<p>‘use strict’;</p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`这是一个</span></span><br><span class="line"><span class="string">多行</span></span><br><span class="line"><span class="string">字符串`</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'小明'</span>;</span><br><span class="line"><span class="keyword">var</span> age = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">var</span> message = <span class="string">`你好, <span class="subst">$&#123;name&#125;</span>, 你今年<span class="subst">$&#123;age&#125;</span>岁了!`</span>;</span><br><span class="line">alert(message);</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/02/05/总结/JavaScript 总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/05/总结/JavaScript 总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机网络/3 第三章 数据链路层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -504,126 +1111,158 @@
 
 
   
-    <article id="post-计算机网络/2 第二章 物理层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-总结/Git 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/14/计算机网络/2 第二章 物理层/">物理层</a>
+      <a class="article-title" href="/2018/01/11/总结/Git 总结/">Git 总结</a>
     </h1>
   
 
         
-        <a href="/2017/11/14/计算机网络/2 第二章 物理层/" class="archive-article-date">
-  	<time datetime="2017-11-14T09:05:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+        <a href="/2018/01/11/总结/Git 总结/" class="archive-article-date">
+  	<time datetime="2018-01-11T13:53:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="物理层的基本概念"><a href="#物理层的基本概念" class="headerlink" title="物理层的基本概念"></a>物理层的基本概念</h1><p>物理层的作用是屏蔽掉传输媒体和通信手段的差异，使数据链路层只需要考虑如何完成本层的协议和服务，而不必考虑网络具体的传输某体和通信手段是什么。用于物理层的协议也常称为物理层的<strong>规程</strong>。</p>
-<blockquote>
-<p>其实物理层规程就是物理层协议。只是在<em>协议</em>这个名词出现之前人们就先使用了<strong>规程</strong>这一名词、</p>
+        <p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">Git教程(廖雪峰)</a></p>
+<h1 id="git-config"><a href="#git-config" class="headerlink" title="git config"></a>git config</h1><ul>
+<li>git config –global user.name “Your Name”</li>
+<li>git config –global user.email “<a href="mailto:email@example.com" target="_blank" rel="noopener">email@example.com</a>“</li>
+<li>git config –list <blockquote>
+<p>注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
 </blockquote>
-<p>可以将物理层的主要任务描述为确定与传输某体的接口有关的一些特性</p>
+</li>
+</ul>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><ul>
+<li>git init</li>
+<li>git diff</li>
+<li>git add &lt;file></li>
+<li>git commit</li>
+<li>git status</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/005UDS28gy1fphjs9fdwoj30dd0cngmi.jpg" alt></p>
+        
+          <a class="article-more-a" href="/2018/01/11/总结/Git 总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/11/总结/Git 总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-总结/Python 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/19/总结/Python 总结/">Python 总结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/19/总结/Python 总结/" class="archive-article-date">
+  	<time datetime="2017-12-19T07:18:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="noopener">廖雪峰 Python教程</a></p>
+<h1 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li>整数</li>
+<li>浮点数</li>
+<li>字符串<blockquote>
+<p>如果字符串内部有很多换行，用\n写在一行里不好阅读，为了简化，Python允许用’’’…’’’的格式表示多行内容</p>
+</blockquote>
+</li>
+<li>布尔值</li>
+<li>空值</li>
+<li>list</li>
+<li>tuple</li>
+<li>set</li>
+<li>dict<blockquote>
+<p>如果key不存在，dict就会报错：要避免key不存在的错误，有两种办法，</p>
 <ul>
-<li><strong>机械特性</strong>：指明接口所用接线器的形状和吃醋才能，引脚数目和排列，固定和锁定装置，等等。平时常见的各种规格的接插件都有严格的标准化的规定。</li>
-<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的电压的范围</li>
-<li><strong>功能特性</strong>：指明某条线上出现的某一电平的电压表示何种意义</li>
-<li><strong>过程特性</strong>：指明度低于不同功能的各种可能时间出现顺序<blockquote>
-<p>数据在计算机中多采用<strong>并行传输</strong>方式。但数据在通信线路(传输媒体)上的传输方式一般都是<strong>串行传输</strong>(这是出于经济上的考虑)，即逐个比特按照时间顺序传输。因此物理层还要完成传输方式的转换。</p>
+<li>一是通过in判断key是否存在：</li>
+<li>二是通过dict提供的get()方法，如果key不存在，可以返回None，或者自己指定的value：</li>
+<li>要删除一个key，用pop(key)方法，对应的value也会从dict中删除：</li>
+</ul>
 </blockquote>
 </li>
 </ul>
+<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br></pre></td></tr></table></figure>
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'Hello, %s'</span> % <span class="string">'world'</span></span><br><span class="line"><span class="string">'Hello, world'</span></span><br><span class="line"><span class="string">'Hi, %s, you have $%d.'</span> % (<span class="string">'Michael'</span>, <span class="number">1000000</span>)</span><br><span class="line"><span class="string">'Hi, Michael, you have $1000000</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'</span>Hello, &#123;<span class="number">0</span>&#125;, 成绩提升了 &#123;<span class="number">1</span>:<span class="number">.1</span>f&#125;%<span class="string">'.format('</span>小明<span class="string">', 17.125)</span></span><br><span class="line"><span class="string">'</span>Hello, 小明, 成绩提升了 <span class="number">17.1</span>%<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">f"&#123;name&#125;"</span></span><br></pre></td></tr></table></figure>
+<p>三元运算符<br>print(“Hello”) if True else Print(“False”)</p>
+<p>列表拼接<br>[] + []<br>[] * 5</p>
         
-          <a class="article-more-a" href="/2017/11/14/计算机网络/2 第二章 物理层/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/14/计算机网络/2 第二章 物理层/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-计算机网络/1 第一章 概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/计算机网络/1 第一章 概述/">概述</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/24/计算机网络/1 第一章 概述/" class="archive-article-date">
-  	<time datetime="2017-10-24T06:09:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>21世纪的一些重要特征就是数字化、网络化和信息化，它是一个以网络为核心的信息时代。这里说的网络是指“三网”： 电信网络、有线电视网络和计算机网络</p>
-<p>计算机网络向用户提供最重要的功能有两个</p>
-<ol>
-<li><strong>连通性</strong></li>
-<li><strong>共享</strong></li>
-</ol>
-<h1 id="因特网概述"><a href="#因特网概述" class="headerlink" title="因特网概述"></a>因特网概述</h1><h2 id="网络的网络"><a href="#网络的网络" class="headerlink" title="网络的网络"></a>网络的网络</h2><p>网络是由若干节点和连接这些节点的链路组成<br>  <strong>网络把许多计算机连接在一起，而因特网则把许多网络连接在一起</strong></p>
-<h2 id="因特网发展的三个阶段"><a href="#因特网发展的三个阶段" class="headerlink" title="因特网发展的三个阶段"></a>因特网发展的三个阶段</h2><h3 id="第一个是-ARPANET"><a href="#第一个是-ARPANET" class="headerlink" title="第一个是 ARPANET"></a>第一个是 ARPANET</h3><p>以小写字母i开始的internet 是一个通用名词，它泛指由多计算机网络互联而成的网络。在这些网络之间的通信协议可以是任意的。<br>以大写字母I开始的Internet 是一个通用名词，它指当前全球最大的、开放的、由众多网络相互连接而成的特定计算机网络，它采用TCP/IP协议族作为通信的规则，其前身是美国的ARPANET</p>
-<h3 id="第二阶段的特点是建成了三级结构的因特网，国家科学基金网，-NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。"><a href="#第二阶段的特点是建成了三级结构的因特网，国家科学基金网，-NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。" class="headerlink" title="第二阶段的特点是建成了三级结构的因特网，国家科学基金网， NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。"></a>第二阶段的特点是建成了三级结构的因特网，国家科学基金网， NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。</h3><h3 id="第三阶段的特点是逐渐形成了多层ISP（Internet-Service-Provider）结构的因特网"><a href="#第三阶段的特点是逐渐形成了多层ISP（Internet-Service-Provider）结构的因特网" class="headerlink" title="第三阶段的特点是逐渐形成了多层ISP（Internet Service Provider）结构的因特网"></a>第三阶段的特点是逐渐形成了多层ISP（Internet Service Provider）结构的因特网</h3><p>根据提供服务的覆盖面积大小以及所拥有的IP地址数目不同，ISP也分成为不同的层次：<strong>主干ISP、地区ISP和本地ISP</strong></p>
-        
-          <a class="article-more-a" href="/2017/10/24/计算机网络/1 第一章 概述/#more">more >></a>
+          <a class="article-more-a" href="/2017/12/19/总结/Python 总结/#more">more >></a>
         
       
 
@@ -632,13 +1271,24 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -647,335 +1297,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/计算机网络/1 第一章 概述/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Head First Servlets and JSP/11. 部署Web应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/">11. 部署Web应用</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/" class="archive-article-date">
-  	<time datetime="2017-09-21T14:30:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>服务器不能得到一个WEB_INF 或 META_INF 下的文件，会响应一个 404 NOT FOUND</strong></p>
-<h1 id="欢迎文件"><a href="#欢迎文件" class="headerlink" title="欢迎文件"></a>欢迎文件</h1><p>如果请求一个路径的话，会找到这个路径下面的默认欢迎文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>不能有/</strong></p>
-        
-          <a class="article-more-a" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Head First Servlets and JSP/08. 无脚本的JSP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/">08. 无脚本的JSP</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/" class="archive-article-date">
-  	<time datetime="2017-09-16T08:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>[] 比 .  ${requestScope[“foo.person”].name }</li>
-<li>[]可以使用命名不规范的对象</li>
-<li>[]可以访问数组和List，并且可以做任意层次的嵌套，只要你受得了</li>
-</ul>
-<h1 id="include指令在转换时发生-lt-include-gt-标准动作在运行时发生"><a href="#include指令在转换时发生-lt-include-gt-标准动作在运行时发生" class="headerlink" title="include指令在转换时发生 / &lt;%@ include%&gt;标准动作在运行时发生"></a>include指令在转换时发生 / <code>&lt;%@ include%&gt;</code>标准动作在运行时发生</h1><p>如果使用include指令，这与你打开JSP页面，并粘贴上“Header.jsp”的内容没有两样。换句话说，这样就好像你把页眉文件的代码重复放在其他JSP中一样。只不过，容器会在转换时为你完成这个工作，所以你不必亲自到处复制代码。你的任务只是编写页面，其中包括一个include指令，其他的任务则由容器负责，它要在转换之前把页眉代码复制到每个JSP中,再编译为生成的servlet.</p>
-<p><code>&lt;jsp:include&gt;</code>则完全不同。它不是从“Header.jsp”复制源代码，include标准动作会在运行时插人“Header.jsp”的响应。<code>&lt;jsp:include&gt;</code>的关键是，容器要根据页面并应用include0方法。所分派/包含的(page) 属性创建一个RequestDispatcher,JSP针对同样的请求和响应对象执行，而且在同一个线程中运行。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Head First Servlets and JSP/07. JSP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/Head First Servlets and JSP/07. JSP/">07. JSP</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/11/Head First Servlets and JSP/07. JSP/" class="archive-article-date">
-  	<time datetime="2017-09-11T15:41:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="容器如何处理JSP"><a href="#容器如何处理JSP" class="headerlink" title="容器如何处理JSP"></a>容器如何处理JSP</h1><ol>
-<li>查看指令,得到转换时可能需要的信息。</li>
-<li>创建一个HttpServlet子类。<blockquote>
-<p>对于Tomcat5,所生成的servlet 会扩展: <code>org.apache.jasper.runtime.HttpJspBase</code></p>
-</blockquote>
-</li>
-<li>如果一个page指令有import属性，它会在类文件的最上面(package语句下面)写import语句。<br>对于Tomcat 5,package语句(你不用操心) 是: <code>package org.apache.jsp</code>;</li>
-<li>如果有声明，容器将这些声明写到类文件中，通常放在类声明下面，并在服务方法前面。Tomcat5声明了自己的一个静态变量和一个实例方法。</li>
-<li>建立服务方法。服务方法的具体方法名是<code>_jspService()</code>。<code>_jspService()</code>由servlet超类被覆盖的<code>service()</code>方法调用，要接收<code>HttpServletRequest</code> 和<code>HttpServletResponse</code> 参数在建立这个方法时，容器会声明并初始化所有隐式对象</li>
-<li>将曾通的HTML (称为模板文本).scriptlet和表达式放到服务方法中，完成格式化，并写至PrintWriter响应输出。</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/09/11/Head First Servlets and JSP/07. JSP/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/11/Head First Servlets and JSP/07. JSP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Head First Servlets and JSP/06. 会话管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/">06. 会话管理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/" class="archive-article-date">
-  	<time datetime="2017-09-08T16:59:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h1><ul>
-<li>在写至响应的HTML中，URL重写把会话ID增加到其中所有URL的最后。</li>
-<li>会话ID作为请求URL最后的“额外”信息再通过请求返回</li>
-<li>如果客户不接受cookie,URL重写会自动发生，但是必须显式地对所有URL编码。</li>
-<li>要对一个URL编码，需要调用response. encodeURL(String)。</li>
-<li><code>out.println(&quot;&lt;a href=&#39;&quot; + response.encodeURL(&quot;/BeerTest.do&quot;) + &quot;&#39;&gt;click  me&lt;/a &gt;&quot;)</code> ;</li>
-<li>没有办法对静态页面完成自动的URL 重写，所以，如果你依赖于会话，就必须使用动态生成的页面。</li>
-<li>重定向 <code>response.encodeRedirectURL(&quot;res.jsp&quot;)</code>;</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/12/19/总结/Python 总结/">展开全文 >></a>
         </p>
       
 
@@ -1007,7 +1329,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
