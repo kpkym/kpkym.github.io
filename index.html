@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://github.com/kpkym">
   <title>kpkym&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -34,7 +34,7 @@
   
 
 </head>
-
+</html>
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -137,465 +137,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-总结/os" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/11/总结/os/">OS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/11/总结/os/" class="archive-article-date">
-  	<time datetime="2019-01-11T07:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><ol>
-<li>操作系统是一种系统软件，是软，硬资源的控制中心，它以尽量合理有效的方法组织单个或多个用户以多任务方式共享计算机的各种资源。</li>
-<li>资源管理包含两种资源共享使用的方法：时分、空分。</li>
-<li>专用操作系统：多道批处理系统、分时系统、实时系统</li>
-<li>操作系统的最基本特征：并发、共享。</li>
-<li>分时系统的最基本特点：并发性、共享性、交互性、独立性。</li>
-<li>实时系统可分为 ：实时控制、实时事务处理。</li>
-<li>实时系统的特征与功能：时钟分辨度高、支持可剥夺任务调度、多级中断机制。</li>
-<li>主要操作系统：Windows、Linux、UNIX、Solaris、AIX、HP UX、MAC OS、NetWare。</li>
-</ol>
-<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><ol>
-<li>中断的引入是为了开发 CPU 和通道之间的并行操作。</li>
-<li>中断也称为外中断。异常称为内中断、例外或陷入。</li>
-<li>断点：CPU 刚执行完的那条指令地址称为断点，断点应为中断的那一瞬间程序计数器所指指令的前一条指令地址，即中断发生时正在执行的那一条指令的地址。</li>
-<li>恢复点：中断时程序计数器所指的地址。</li>
-<li>核心态：也称为管态、系统状态、监督方式。</li>
-<li>用户态：目态、用户状态、用户方式。</li>
-<li>Intel x86 上运行的操作系统只用到 0 环和 3 环，0 环表示核心态，3 环表示用户态。</li>
-<li>一般为系统中每个中断/异常信号编制一个相应的中断/异常处理程序，并把这些程序的入口地址放在特定的主存单元中。通常将这片存放中断/异常处理程序入口地址的主存单元称为中断/异常向量，或系统控制块。</li>
-<li>中断/异常处理<ol>
-<li>中断/异常进入</li>
-<li>保存现场</li>
-<li>分析原因并转中断/异常处理程序</li>
-<li>恢复现场</li>
-</ol>
-</li>
-</ol>
-<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h1><ol>
-<li>自陷指令：是系统调用的一种形式</li>
-<li>进程：进程是支持程序执行的机制，进程可以理解为程序对数据或请求的处理过程。</li>
-<li>进程控制块：操作系统建立一个表格用来描述该进程的存在及状态。它描述进程标识、空间、运行状态、资源使用等信息。</li>
-<li>进程状态变化图：P52</li>
-<li>调度：高级调度、中级调度、低级调度。</li>
-<li>进程调度方式：非剥夺方式、剥夺方式。</li>
-</ol>
-<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1><ol>
-<li>同步关系：为完成用户任务的伙伴进程间，因为需要在某些位置上协调它们的工作次序而等待、传递信息所产生的制约关系。</li>
-<li>互斥关系：进程间因相互竞争使用独占型资源所产生的制约关系，如进程间因争夺打印机设备而导致一方须待另一方使用结束后方可使用。</li>
-<li>临界资源：一次仅允许一个进程使用的资源。</li>
-<li>临界段：各进程必须互斥执行的那种程序段，该程序段实施对临界资源的操作。</li>
-<li>解决临界段问题的硬件实现方法<br>屏蔽中断方法<br>Test_and_Set 指令<br>Swap 指令</li>
-<li>原语：完成某种功能且不被分割、不被中断执行的操作序列。</li>
-<li>信号量：信号量机制是一种功能较强的机制，可用来解决互斥与同步问题。</li>
-<li>进程通信：共享存储方法、消息传递方法。</li>
-<li>死锁：在一个进程集合中，若每个进程都在等待某些释放资源事件的发生，而这些事件又必须由这个进程集合中的某些进程来产生，就称该进程集合处于死锁状态。</li>
-<li>死锁出现必须满足的必要条件：互斥、占有等待、非剥夺、循环等待。</li>
-</ol>
-<h1 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h1><ol>
-<li>连续空间分配：单道连续分配、多道固定分区法、多道连续可变分区法。</li>
-<li>不连续空间分配：页式管理、段式管理、段页式管理、改进的页式管理。</li>
-<li>存储碎片：进入各存储块的作业长度往往短于该块的长度，因而存在一些未加利用的存储空间。若大作业较多，小存储块就常处于空闲状态而形成浪费。这些为得到利用的空间称为存储碎片。</li>
-<li>假设访问主存的时间为 750ns，搜索快表的时间为 50ns，命中率为 80%，则可求出平均访问指令执行时间为：<br>80% X（50+750）+20%X（50+750+750）=950ns</li>
-<li>Belady 奇异：替换策略不符合随着驻留集大小的增大，页故障数一定减少的规律。</li>
-<li>驻留集替换策略 (FIFO、OPT、LRU)</li>
-<li>驻留集可变的替换策略：WS、SWS、VMIN。</li>
-</ol>
-<h1 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h1><ol>
-<li>常见外部设备分类：人机交互类外部设备、存储类外部设备、网络通信外部设备。</li>
-<li>I/O 控制方式：程序直接控制方式、中断驱动方式、DMA 方式、I/O 通道控制方式。</li>
-<li>设备驱动程序：一个设备驱动程序一般管理相同类的所有设备，它由许多子程序组成，这些子程序与设备特性相关，通常由上层设备无关层设备类系统调用处理函数调用。</li>
-<li>缓冲技术：单缓冲、双缓冲、循环缓冲。</li>
-</ol>
-<h1 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h1><ol>
-<li>文件：文件室友创建者定义的一组相关信息。通常将程序（源程序、目标代码）和数据组织成文件。</li>
-<li>文件的访问方式：顺序访问、直接访问。</li>
-<li>文件在辅存的存放方法：顺序结构、链接结构、索引结构。</li>
-<li>文件控制块：文件应包括文件控制块和文件体。后者是文件的有效信息部分；前者则是一张用于存放文件标识、定位、说明和控制等信息的表格。</li>
-<li>一级目录结构：为辅存的全部文件设立一张逻辑上线性排列的目录表。</li>
-<li>文件访问保护：口令保护、加密保护、访问控制。</li>
-<li>文件备份：批量备份、同步备份。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Docker//" class="article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/11/总结/os/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-总结/docker 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/01/总结/docker 总结/" class="archive-article-date">
-  	<time datetime="2018-12-01T08:36:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>UnionFS（联合文件系统）：Union文件系统（UnionFS）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)。Union 文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像。</p>
-</blockquote>
-<p>特性：一次同时加载多个文件系统，但从外面看起来，只能看到一个文件系统，联合加载会把各层文件系统叠加起来，这样最终的文件系统会包含所有底层的文件和目录</p>
-<h1 id="Docker镜像加载原理："><a href="#Docker镜像加载原理：" class="headerlink" title="Docker镜像加载原理："></a>Docker镜像加载原理：</h1><p>docker的镜像实际上由一层一层的文件系统组成，这种层级的文件系统UnionFS。<br>bootfs(boot file system)主要包含bootloader和kernel, bootloader主要是引导加载kernel, Linux刚启动时会加载bootfs文件系统，在Docker镜像的最底层是bootfs。这一层与我们典型的Linux/Unix系统是一样的，包含boot加载器和内核。当boot加载完成之后整个内核就都在内存中了，此时内存的使用权已由bootfs转交给内核，此时系统也会卸载bootfs。</p>
-<blockquote>
-<p>rootfs (root file system) ，在bootfs之上。包含的就是典型 Linux 系统中的 /dev, /proc, /bin, /etc 等标准目录和文件。rootfs就是各种不同的操作系统发行版，比如Ubuntu，Centos等等。<br>。 </p>
-</blockquote>
-<p>平时我们安装进虚拟机的CentOS都是好几个G，为什么docker这里才200M？？</p>
-<blockquote>
-<p>对于一个精简的OS，rootfs可以很小，只需要包括最基本的命令、工具和程序库就可以了，因为底层直接用Host的kernel，自己只需要提供 rootfs 就行了。由此可见对于不同的linux发行版, bootfs基本是一致的, rootfs会有差别, 因此不同的发行版可以公用bootfs。</p>
-</blockquote>
-<h1 id="为什么-Docker-镜像要采用这种分层结构呢"><a href="#为什么-Docker-镜像要采用这种分层结构呢" class="headerlink" title="为什么 Docker 镜像要采用这种分层结构呢"></a>为什么 Docker 镜像要采用这种分层结构呢</h1><p>最大的一个好处就是 - 共享资源</p>
-<blockquote>
-<p>比如：有多个镜像都从相同的 base 镜像构建而来，那么宿主机只需在磁盘上保存一份base镜像，<br>同时内存中也只需加载一份 base 镜像，就可以为所有容器服务了。而且镜像的每一层都可以被共享。</p>
-</blockquote>
-<p><strong>Docker镜像都是只读的</strong><br>当容器启动时，一个新的可写层被加载到镜像的顶部。<br>这一层通常被称作“容器层”，“容器层”之下的都叫“镜像层”。</p>
-<ol>
-<li>docker commit提交容器副本使之成为一个新的镜像</li>
-<li>docker commit -m=“提交的描述信息” -a=“作者” 容器ID 要创建的目标镜像名:[标签名]</li>
-</ol>
-<p>Docker解决了运行环境和配置问题软件容器，方便做持续集成并有助于整体发布的容器虚拟化技术。</p>
-<blockquote>
-<p>由于前面虚拟机存在这些缺点，Linux 发展出了另一种虚拟化技术：Linux 容器（Linux Containers，缩写为 LXC）。<br>Linux 容器不是模拟一个完整的操作系统，而是对进程进行隔离。有了容器，就可以将软件运行所需的所有资源打包到一个隔离的容器中。容器与虚拟机不同，不需要捆绑一整套操作系统，只需要软件工作所需的库资源和设置。系统因此而变得高效轻量并保证部署在任何环境中的软件都能始终如一地运行。</p>
-</blockquote>
-<h1 id="比较了-Docker-和传统虚拟化方式的不同之处："><a href="#比较了-Docker-和传统虚拟化方式的不同之处：" class="headerlink" title="比较了 Docker 和传统虚拟化方式的不同之处："></a>比较了 Docker 和传统虚拟化方式的不同之处：</h1><ul>
-<li>传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；</li>
-<li>而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</li>
-<li>每个容器之间互相隔离，每个容器有自己的文件系统 ，容器之间进程不会相互影响，能区分计算资源。</li>
-</ul>
-<h1 id="Docker是怎么工作的"><a href="#Docker是怎么工作的" class="headerlink" title="Docker是怎么工作的:"></a>Docker是怎么工作的:</h1><blockquote>
-<p>Docker是一个Client-Server结构的系统，Docker守护进程运行在主机上， 然后通过Socket连接从客户端访问，守护进程从客户端接受命令并管理运行在主机上的容器。 容器，是一个运行时环境，就是我们前面说到的集装箱。</p>
-</blockquote>
-<h2 id="为什么Docker比较比VM快"><a href="#为什么Docker比较比VM快" class="headerlink" title="为什么Docker比较比VM快"></a>为什么Docker比较比VM快</h2><ol>
-<li>docker有着比虚拟机更少的抽象层。由亍docker不需要Hypervisor实现硬件资源虚拟化,运行在docker容器上的程序直接使用的都是实际物理机的硬件资源。因此在CPU、内存利用率上docker将会在效率上有明显优势。</li>
-<li>docker利用的是宿主机的内核,而不需要Guest OS。因此,当新建一个容器时,docker不需要和虚拟机一样重新加载一个操作系统内核。仍而避免引寻、加载操作系统内核返个比较费时费资源的过程,当新建一个虚拟机时,虚拟机软件需要加载Guest OS,返个新建过程是分钟级别的。而docker由于直接利用宿主机的操作系统,则省略了返个过程,因此新建一个docker容器只需要几秒钟。</li>
-</ol>
-<p>帮助命令<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info</span><br><span class="line">docker --help</span><br></pre></td></tr></table></figure></p>
-<p>镜像命令<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br><span class="line">docker search 某个XXX镜像名字</span><br><span class="line"></span><br><span class="line">docker pull 某个XXX镜像名字</span><br><span class="line">docker pull 镜像名字[:TAG]</span><br><span class="line"></span><br><span class="line">docker rmi 某个XXX镜像名字ID</span><br><span class="line">docker rmi  -f 镜像ID</span><br><span class="line">docker rmi -f 镜像名1:TAG 镜像名2:TAG </span><br><span class="line">docker rmi -f $(docker images -qa)</span><br></pre></td></tr></table></figure></p>
-<p>exit 退出交互式界面，容器停止运行<br>Crtl+P 或者Crtl+Q 退出交互式界面，容器在后台运行。(注意是大写P和Q)</p>
-<p>容器操作<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker create 容器名或者容器ID 创建容器</span><br><span class="line">docker start [-i] 容器名       启动容器</span><br><span class="line">docker run 容器名或者容器ID    运行容器，相当于docker create + docker start</span><br><span class="line">docker attach 容器名或者容器ID 进入容器的命令行</span><br><span class="line">docker stop 容器名                             停止容器</span><br><span class="line">docker rm 容器名                               删除容器</span><br><span class="line"></span><br><span class="line">docker top 容器名          查看WEB应用程序容器的进程</span><br><span class="line">docker inspect 容器名 查看Docker的底层信息</span><br></pre></td></tr></table></figure></p>
-<p>守护式容器<br>我们可以使用守护式容器运行一个或者多个服务，例如运行lamp服务、redis服务、mysql服务等。</p>
-<p>什么是守护式容器？</p>
-<ul>
-<li>能够长期运行</li>
-<li>没有交互式会话</li>
-<li>适合运行应用程序和服务</li>
-<li>启动守护式容器：</li>
-</ul>
-<p>docker run -d IMAGE [COMMOND] [ARG…]</p>
-<blockquote>
-<p><a href="https://webkul.com/blog/docker-container-will-automatically-stop-run/" target="_blank" rel="noopener">https://webkul.com/blog/docker-container-will-automatically-stop-run/</a><br>Docker Container stopped automatically after starting. You can check exit code of container if it is 0 means container exited after all exection, means you have to run the process in foreground to keep container running</p>
-</blockquote>
-<h1 id="Docker容器数据卷"><a href="#Docker容器数据卷" class="headerlink" title="Docker容器数据卷"></a>Docker容器数据卷</h1><blockquote>
-<p>卷就是目录或文件，存在于一个或多个容器中，由docker挂载到容器，但不属于联合文件系统，因此能够绕过Union File System提供一些用于持续存储或共享数据的特性：<br>卷的设计目的就是数据的持久化，完全独立于容器的生存周期，因此Docker不会在容器删除时删除其挂载的数据卷</p>
-</blockquote>
-<p><strong>特点：</strong></p>
-<ol>
-<li>数据卷可在容器之间共享或重用数据</li>
-<li>卷中的更改可以直接生效</li>
-<li>数据卷中的更改不会包含在镜像的更新中</li>
-<li>数据卷的生命周期一直持续到没有容器使用它为止</li>
-</ol>
-<p>命令</p>
-<blockquote>
-<p>docker run -it -v /宿主机目录:/容器内目录 centos /bin/bash</p>
-</blockquote>
-<p>查看数据卷是否挂载成功</p>
-<blockquote>
-<p>docker inspect 容器ID</p>
-</blockquote>
-<p>命令(带权限)</p>
-<blockquote>
-<p>docker run -it -v /宿主机绝对路径目录:/容器内目录:ro 镜像名</p>
-</blockquote>
-<p>DockerFile添加</p>
-<blockquote>
-<p>根目录下新建mydocker文件夹并进入<br><code>VOLUME[&quot;/dataVolumeContainer&quot;,&quot;/dataVolumeContainer2&quot;,&quot;/dataVolumeContainer3&quot;]</code></p>
-</blockquote>
-<p>说明：</p>
-<blockquote>
-<p>出于可移植和分享的考虑，用-v 主机目录:容器目录这种方法不能够直接在Dockerfile中实现。由于宿主机目录是依赖于特定宿主机的，并不能够保证在所有的宿主机上都存在这样的特定目录。</p>
-</blockquote>
-<h1 id="File构建"><a href="#File构建" class="headerlink" title="File构建"></a>File构建</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># volume test</span><br><span class="line">FROM centos</span><br><span class="line">VOLUME ["/dataVolumeContainer1","/dataVolumeContainer2"]</span><br><span class="line">CMD echo "finished,--------success1"</span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure>
-<h2 id="容器间传递共享-–volumes-from"><a href="#容器间传递共享-–volumes-from" class="headerlink" title="容器间传递共享(–volumes-from)"></a>容器间传递共享(–volumes-from)</h2><blockquote>
-<p>结论：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止</p>
-</blockquote>
-<h1 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h1><blockquote>
-<p>Dockerfile是用来构建Docker镜像的构建文件，是由一系列命令和参数构成的脚本。</p>
-</blockquote>
-<h2 id="构建三步骤"><a href="#构建三步骤" class="headerlink" title="构建三步骤"></a>构建三步骤</h2><ol>
-<li>编写Dockerfile文件</li>
-<li>docker build</li>
-<li>docker run</li>
-</ol>
-<h2 id="DockerFile构建过程解析"><a href="#DockerFile构建过程解析" class="headerlink" title="DockerFile构建过程解析"></a>DockerFile构建过程解析</h2><h3 id="Dockerfile内容基础知识"><a href="#Dockerfile内容基础知识" class="headerlink" title="Dockerfile内容基础知识"></a>Dockerfile内容基础知识</h3><ol>
-<li>每条保留字指令都必须为大写字母且后面要跟随至少一个参数</li>
-<li>指令按照从上到下，顺序执行</li>
-<li>#表示注释</li>
-<li>每条指令都会创建一个新的镜像层，并对镜像进行提交</li>
-</ol>
-<h3 id="Docker执行Dockerfile的大致流程"><a href="#Docker执行Dockerfile的大致流程" class="headerlink" title="Docker执行Dockerfile的大致流程"></a>Docker执行Dockerfile的大致流程</h3><ol>
-<li>docker从基础镜像运行一个容器</li>
-<li>执行一条指令并对容器作出修改</li>
-<li>执行类似docker commit的操作提交一个新的镜像层</li>
-<li>docker再基于刚提交的镜像运行一个新容器</li>
-<li>执行dockerfile中的下一条指令直到所有指令都执行完成</li>
-</ol>
-<p>从应用软件的角度来看，Dockerfile、Docker镜像与Docker容器分别代表软件的三个不同阶段，</p>
-<ul>
-<li>Dockerfile是软件的原材料</li>
-<li>Docker镜像是软件的交付品</li>
-<li>Docker容器则可以认为是软件的运行态。</li>
-</ul>
-<blockquote>
-<p>Dockerfile面向开发，Docker镜像成为交付标准，Docker容器则涉及部署与运维，三者缺一不可，合力充当Docker体系的基石。</p>
-</blockquote>
-<ol>
-<li>Dockerfile，需要定义一个Dockerfile，Dockerfile定义了进程需要的一切东西。Dockerfile涉及的内容包括执行代码或者是文件、环境变量、依赖包、运行时环境、动态链接库、操作系统的发行版、服务进程和内核进程(当应用进程需要和系统服务和内核进程打交道，这时需要考虑如何设计namespace的权限控制)等等;</li>
-<li>Docker镜像，在用Dockerfile定义一个文件之后，docker build时会产生一个Docker镜像，当运行 Docker镜像时，会真正开始提供服务;</li>
-<li>Docker容器，容器是直接提供服务的。</li>
-</ol>
-<h1 id="DockerFile体系结构-保留字指令"><a href="#DockerFile体系结构-保留字指令" class="headerlink" title="DockerFile体系结构(保留字指令)"></a>DockerFile体系结构(保留字指令)</h1><ol>
-<li>FROM<blockquote>
-<p>基础镜像，当前新镜像是基于哪个镜像的</p>
-</blockquote>
-</li>
-<li>MAINTAINER<blockquote>
-<p>镜像维护者的姓名和邮箱地址</p>
-</blockquote>
-</li>
-<li>RUN<blockquote>
-<p>容器构建时需要运行的命令</p>
-</blockquote>
-</li>
-<li>EXPOSE<blockquote>
-<p>当前容器对外暴露出的端口</p>
-</blockquote>
-</li>
-<li>WORKDIR<blockquote>
-<p>指定在创建容器后，终端默认登陆的进来工作目录，一个落脚点</p>
-</blockquote>
-</li>
-<li>ENV<blockquote>
-<p>用来在构建镜像过程中设置环境变量</p>
-</blockquote>
-</li>
-<li>ADD<blockquote>
-<p>将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包</p>
-</blockquote>
-</li>
-<li>COPY<blockquote>
-<p>类似ADD，拷贝文件和目录到镜像中。<br>将从构建上下文目录中 &lt;源路径&gt; 的文件/目录复制到新的一层的镜像内的 &lt;目标路径&gt; 位置</p>
-</blockquote>
-</li>
-<li>VOLUME<blockquote>
-<p>容器数据卷，用于数据保存和持久化工作</p>
-</blockquote>
-</li>
-<li>CMD<blockquote>
-<p>指定一个容器启动时要运行的命令<br>Dockerfile 中可以有多个 CMD 指令，但只有最后一个生效，CMD 会被 docker run 之后的参数替换</p>
-</blockquote>
-</li>
-<li>ENTRYPOINT <blockquote>
-<p>指定一个容器启动时要运行的命令<br>ENTRYPOINT 的目的和 CMD 一样，都是在指定容器启动程序及参数</p>
-</blockquote>
-</li>
-<li>ONBUILD<blockquote>
-<p>当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发</p>
-</blockquote>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Docker//" class="article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/01/总结/docker 总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-总结/thymeleaf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>开头：<code>&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/27/总结/thymeleaf/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-计算机网络/6 第六章 应用层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -676,104 +217,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/03/31/计算机网络/6 第六章 应用层/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-总结/Redis 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/25/总结/Redis 总结/" class="archive-article-date">
-  	<time datetime="2018-03-25T08:33:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>config set password ‘123456’</li>
-<li>auth 123456</li>
-</ul>
-<p><strong>ps -ef|grep redis</strong></p>
-<ul>
-<li>select 切换数据库</li>
-<li>dbsize 常看当前数据库的key的数量</li>
-<li>flushdb 清空当前数据库</li>
-<li>flushall 清空全部数据库</li>
-<li>统一密码管理，16个库都是同样密码</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/03/25/总结/Redis 总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Redis//" class="article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/25/总结/Redis 总结/">展开全文 >></a>
         </p>
       
 
@@ -983,96 +426,6 @@
 
 
   
-    <article id="post-总结/JavaScript 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/总结/JavaScript 总结/">JavaScript 总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/05/总结/JavaScript 总结/" class="archive-article-date">
-  	<time datetime="2018-02-05T08:20:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>启用strict模式的方法是在JavaScript代码的第一行写上：</p>
-<p>‘use strict’;</p>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`这是一个</span></span><br><span class="line"><span class="string">多行</span></span><br><span class="line"><span class="string">字符串`</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'小明'</span>;</span><br><span class="line"><span class="keyword">var</span> age = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">var</span> message = <span class="string">`你好, <span class="subst">$&#123;name&#125;</span>, 你今年<span class="subst">$&#123;age&#125;</span>岁了!`</span>;</span><br><span class="line">alert(message);</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/02/05/总结/JavaScript 总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/05/总结/JavaScript 总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-计算机网络/3 第三章 数据链路层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1095,7 +448,7 @@
       
         <h1 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h1><p>数据链路层协议有许多种.但有三个基本问题则是共同的.这三个基本问题是：封装成帧、透明传输和差错检测，下面分别讨论这三个基本问题，</p>
 <p><strong>最大传送单元MTU</strong></p>
-<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><p>为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SOH”或“EOT”00011011)。而在接收端的数据链路层在把数据送往网络层之前删除这个插入的转义字符。这种方法称为字节填充(byte stuffing)或字符填充(character stuffing)。如果转义字符也出现在数据当中，那么解决方法仍然是在转义字符的前面插入一个转义字符。因此,当接收端收到连续的两个转义字符时，就刪除其中前面的一个。图3-7 表示用字节填充法解决透明传输的问题。<br><img src="http://ww1.sinaimg.cn/large/005UDS28gy1fpe9w0dk3qj30ny0aqmxn.jpg" alt=""></p>
+<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><p>为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SOH”或“EOT”00011011)。而在接收端的数据链路层在把数据送往网络层之前删除这个插入的转义字符。这种方法称为字节填充(byte stuffing)或字符填充(character stuffing)。如果转义字符也出现在数据当中，那么解决方法仍然是在转义字符的前面插入一个转义字符。因此,当接收端收到连续的两个转义字符时，就刪除其中前面的一个。图3-7 表示用字节填充法解决透明传输的问题。<br><img src="http://ww1.sinaimg.cn/large/005UDS28gy1fpe9w0dk3qj30ny0aqmxn.jpg" alt></p>
         
           <a class="article-more-a" href="/2018/01/16/计算机网络/3 第三章 数据链路层/#more">more >></a>
         
@@ -1151,45 +504,42 @@
 
 
   
-    <article id="post-总结/Git 总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-计算机网络/2 第二章 物理层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/总结/Git 总结/">Git 总结</a>
+      <a class="article-title" href="/2017/11/14/计算机网络/2 第二章 物理层/">物理层</a>
     </h1>
   
 
         
-        <a href="/2018/01/11/总结/Git 总结/" class="archive-article-date">
-  	<time datetime="2018-01-11T13:53:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-11</time>
+        <a href="/2017/11/14/计算机网络/2 第二章 物理层/" class="archive-article-date">
+  	<time datetime="2017-11-14T09:05:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">Git教程(廖雪峰)</a></p>
-<h1 id="git-config"><a href="#git-config" class="headerlink" title="git config"></a>git config</h1><ul>
-<li>git config –global user.name “Your Name”</li>
-<li>git config –global user.email “<a href="mailto:email@example.com" target="_blank" rel="noopener">email@example.com</a>“</li>
-<li>git config –list <blockquote>
-<p>注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
+        <h1 id="物理层的基本概念"><a href="#物理层的基本概念" class="headerlink" title="物理层的基本概念"></a>物理层的基本概念</h1><p>物理层的作用是屏蔽掉传输媒体和通信手段的差异，使数据链路层只需要考虑如何完成本层的协议和服务，而不必考虑网络具体的传输某体和通信手段是什么。用于物理层的协议也常称为物理层的<strong>规程</strong>。</p>
+<blockquote>
+<p>其实物理层规程就是物理层协议。只是在<em>协议</em>这个名词出现之前人们就先使用了<strong>规程</strong>这一名词、</p>
+</blockquote>
+<p>可以将物理层的主要任务描述为确定与传输某体的接口有关的一些特性</p>
+<ul>
+<li><strong>机械特性</strong>：指明接口所用接线器的形状和吃醋才能，引脚数目和排列，固定和锁定装置，等等。平时常见的各种规格的接插件都有严格的标准化的规定。</li>
+<li><strong>电气特性</strong>：指明在接口电缆的各条线上出现的电压的范围</li>
+<li><strong>功能特性</strong>：指明某条线上出现的某一电平的电压表示何种意义</li>
+<li><strong>过程特性</strong>：指明度低于不同功能的各种可能时间出现顺序<blockquote>
+<p>数据在计算机中多采用<strong>并行传输</strong>方式。但数据在通信线路(传输媒体)上的传输方式一般都是<strong>串行传输</strong>(这是出于经济上的考虑)，即逐个比特按照时间顺序传输。因此物理层还要完成传输方式的转换。</p>
 </blockquote>
 </li>
 </ul>
-<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><ul>
-<li>git init</li>
-<li>git diff</li>
-<li>git add &lt;file></li>
-<li>git commit</li>
-<li>git status</li>
-</ul>
-<p><img src="http://ww1.sinaimg.cn/large/005UDS28gy1fphjs9fdwoj30dd0cngmi.jpg" alt=""></p>
         
-          <a class="article-more-a" href="/2018/01/11/总结/Git 总结/#more">more >></a>
+          <a class="article-more-a" href="/2017/11/14/计算机网络/2 第二章 物理层/#more">more >></a>
         
       
 
@@ -1198,24 +548,13 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
         		</li>
       		
 		</ul>
@@ -1224,7 +563,419 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/11/总结/Git 总结/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/11/14/计算机网络/2 第二章 物理层/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-计算机网络/1 第一章 概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/计算机网络/1 第一章 概述/">概述</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/计算机网络/1 第一章 概述/" class="archive-article-date">
+  	<time datetime="2017-10-24T06:09:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>21世纪的一些重要特征就是数字化、网络化和信息化，它是一个以网络为核心的信息时代。这里说的网络是指“三网”： 电信网络、有线电视网络和计算机网络</p>
+<p>计算机网络向用户提供最重要的功能有两个</p>
+<ol>
+<li><strong>连通性</strong></li>
+<li><strong>共享</strong></li>
+</ol>
+<h1 id="因特网概述"><a href="#因特网概述" class="headerlink" title="因特网概述"></a>因特网概述</h1><h2 id="网络的网络"><a href="#网络的网络" class="headerlink" title="网络的网络"></a>网络的网络</h2><p>网络是由若干节点和连接这些节点的链路组成<br>  <strong>网络把许多计算机连接在一起，而因特网则把许多网络连接在一起</strong></p>
+<h2 id="因特网发展的三个阶段"><a href="#因特网发展的三个阶段" class="headerlink" title="因特网发展的三个阶段"></a>因特网发展的三个阶段</h2><h3 id="第一个是-ARPANET"><a href="#第一个是-ARPANET" class="headerlink" title="第一个是 ARPANET"></a>第一个是 ARPANET</h3><p>以小写字母i开始的internet 是一个通用名词，它泛指由多计算机网络互联而成的网络。在这些网络之间的通信协议可以是任意的。<br>以大写字母I开始的Internet 是一个通用名词，它指当前全球最大的、开放的、由众多网络相互连接而成的特定计算机网络，它采用TCP/IP协议族作为通信的规则，其前身是美国的ARPANET</p>
+<h3 id="第二阶段的特点是建成了三级结构的因特网，国家科学基金网，-NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。"><a href="#第二阶段的特点是建成了三级结构的因特网，国家科学基金网，-NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。" class="headerlink" title="第二阶段的特点是建成了三级结构的因特网，国家科学基金网， NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。"></a>第二阶段的特点是建成了三级结构的因特网，国家科学基金网， NSFNET。它是一个三级计算机网络，分为主干网、地区网和校园网（或企业网）。</h3><h3 id="第三阶段的特点是逐渐形成了多层ISP（Internet-Service-Provider）结构的因特网"><a href="#第三阶段的特点是逐渐形成了多层ISP（Internet-Service-Provider）结构的因特网" class="headerlink" title="第三阶段的特点是逐渐形成了多层ISP（Internet Service Provider）结构的因特网"></a>第三阶段的特点是逐渐形成了多层ISP（Internet Service Provider）结构的因特网</h3><p>根据提供服务的覆盖面积大小以及所拥有的IP地址数目不同，ISP也分成为不同的层次：<strong>主干ISP、地区ISP和本地ISP</strong></p>
+        
+          <a class="article-more-a" href="/2017/10/24/计算机网络/1 第一章 概述/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/计算机网络//" class="article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/计算机网络/1 第一章 概述/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/11. 部署Web应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/">11. 部署Web应用</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/" class="archive-article-date">
+  	<time datetime="2017-09-21T14:30:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>服务器不能得到一个WEB_INF 或 META_INF 下的文件，会响应一个 404 NOT FOUND</strong></p>
+<h1 id="欢迎文件"><a href="#欢迎文件" class="headerlink" title="欢迎文件"></a>欢迎文件</h1><p>如果请求一个路径的话，会找到这个路径下面的默认欢迎文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>不能有/</strong></p>
+        
+          <a class="article-more-a" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/08. 无脚本的JSP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/">08. 无脚本的JSP</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/" class="archive-article-date">
+  	<time datetime="2017-09-16T08:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>[] 比 .  ${requestScope[“foo.person”].name }</li>
+<li>[]可以使用命名不规范的对象</li>
+<li>[]可以访问数组和List，并且可以做任意层次的嵌套，只要你受得了</li>
+</ul>
+<h1 id="include指令在转换时发生-lt-include-gt-标准动作在运行时发生"><a href="#include指令在转换时发生-lt-include-gt-标准动作在运行时发生" class="headerlink" title="include指令在转换时发生 / &lt;%@ include%&gt;标准动作在运行时发生"></a>include指令在转换时发生 / <code>&lt;%@ include%&gt;</code>标准动作在运行时发生</h1><p>如果使用include指令，这与你打开JSP页面，并粘贴上“Header.jsp”的内容没有两样。换句话说，这样就好像你把页眉文件的代码重复放在其他JSP中一样。只不过，容器会在转换时为你完成这个工作，所以你不必亲自到处复制代码。你的任务只是编写页面，其中包括一个include指令，其他的任务则由容器负责，它要在转换之前把页眉代码复制到每个JSP中,再编译为生成的servlet.</p>
+<p><code>&lt;jsp:include&gt;</code>则完全不同。它不是从“Header.jsp”复制源代码，include标准动作会在运行时插人“Header.jsp”的响应。<code>&lt;jsp:include&gt;</code>的关键是，容器要根据页面并应用include0方法。所分派/包含的(page) 属性创建一个RequestDispatcher,JSP针对同样的请求和响应对象执行，而且在同一个线程中运行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/16/Head First Servlets and JSP/08. 无脚本的JSP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/07. JSP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/Head First Servlets and JSP/07. JSP/">07. JSP</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/11/Head First Servlets and JSP/07. JSP/" class="archive-article-date">
+  	<time datetime="2017-09-11T15:41:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="容器如何处理JSP"><a href="#容器如何处理JSP" class="headerlink" title="容器如何处理JSP"></a>容器如何处理JSP</h1><ol>
+<li>查看指令,得到转换时可能需要的信息。</li>
+<li>创建一个HttpServlet子类。<blockquote>
+<p>对于Tomcat5,所生成的servlet 会扩展: <code>org.apache.jasper.runtime.HttpJspBase</code></p>
+</blockquote>
+</li>
+<li>如果一个page指令有import属性，它会在类文件的最上面(package语句下面)写import语句。<br>对于Tomcat 5,package语句(你不用操心) 是: <code>package org.apache.jsp</code>;</li>
+<li>如果有声明，容器将这些声明写到类文件中，通常放在类声明下面，并在服务方法前面。Tomcat5声明了自己的一个静态变量和一个实例方法。</li>
+<li>建立服务方法。服务方法的具体方法名是<code>_jspService()</code>。<code>_jspService()</code>由servlet超类被覆盖的<code>service()</code>方法调用，要接收<code>HttpServletRequest</code> 和<code>HttpServletResponse</code> 参数在建立这个方法时，容器会声明并初始化所有隐式对象</li>
+<li>将曾通的HTML (称为模板文本).scriptlet和表达式放到服务方法中，完成格式化，并写至PrintWriter响应输出。</li>
+</ol>
+        
+          <a class="article-more-a" href="/2017/09/11/Head First Servlets and JSP/07. JSP/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/11/Head First Servlets and JSP/07. JSP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Head First Servlets and JSP/06. 会话管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/">06. 会话管理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/" class="archive-article-date">
+  	<time datetime="2017-09-08T16:59:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h1><ul>
+<li>在写至响应的HTML中，URL重写把会话ID增加到其中所有URL的最后。</li>
+<li>会话ID作为请求URL最后的“额外”信息再通过请求返回</li>
+<li>如果客户不接受cookie,URL重写会自动发生，但是必须显式地对所有URL编码。</li>
+<li>要对一个URL编码，需要调用response. encodeURL(String)。</li>
+<li><code>out.println(&quot;&lt;a href=&#39;&quot; + response.encodeURL(&quot;/BeerTest.do&quot;) + &quot;&#39;&gt;click  me&lt;/a &gt;&quot;)</code> ;</li>
+<li>没有办法对静态页面完成自动的URL 重写，所以，如果你依赖于会话，就必须使用动态生成的页面。</li>
+<li>重定向 <code>response.encodeRedirectURL(&quot;res.jsp&quot;)</code>;</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Head-First-Servlets-and-JSP//" class="article-tag-list-link color3">Head First Servlets and JSP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/">展开全文 >></a>
         </p>
       
 
@@ -1256,7 +1007,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1351,7 +1102,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:

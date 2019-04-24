@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://github.com/kpkym">
   <title>数据链路层 | kpkym&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -37,7 +37,7 @@
   
 
 </head>
-
+</html>
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -160,7 +160,7 @@
       
         <h1 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h1><p>数据链路层协议有许多种.但有三个基本问题则是共同的.这三个基本问题是：封装成帧、透明传输和差错检测，下面分别讨论这三个基本问题，</p>
 <p><strong>最大传送单元MTU</strong></p>
-<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><p>为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SOH”或“EOT”00011011)。而在接收端的数据链路层在把数据送往网络层之前删除这个插入的转义字符。这种方法称为字节填充(byte stuffing)或字符填充(character stuffing)。如果转义字符也出现在数据当中，那么解决方法仍然是在转义字符的前面插入一个转义字符。因此,当接收端收到连续的两个转义字符时，就刪除其中前面的一个。图3-7 表示用字节填充法解决透明传输的问题。<br><img src="http://ww1.sinaimg.cn/large/005UDS28gy1fpe9w0dk3qj30ny0aqmxn.jpg" alt=""></p>
+<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><p>为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SOH”或“EOT”00011011)。而在接收端的数据链路层在把数据送往网络层之前删除这个插入的转义字符。这种方法称为字节填充(byte stuffing)或字符填充(character stuffing)。如果转义字符也出现在数据当中，那么解决方法仍然是在转义字符的前面插入一个转义字符。因此,当接收端收到连续的两个转义字符时，就刪除其中前面的一个。图3-7 表示用字节填充法解决透明传输的问题。<br><img src="http://ww1.sinaimg.cn/large/005UDS28gy1fpe9w0dk3qj30ny0aqmxn.jpg" alt></p>
 <a id="more"></a>
 <h2 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h2><p>如果提高信噪比，就可以使误码率减小</p>
 <p>循环冗余校验CRC</p>
@@ -304,18 +304,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/02/05/总结/JavaScript 总结/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/02/12/计算机网络/4 第四章 网络层/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          JavaScript 总结
+          网络层
         
       </div>
     </a>
   
   
-    <a href="/2018/01/11/总结/Git 总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git 总结</div>
+    <a href="/2017/11/14/计算机网络/2 第二章 物理层/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">物理层</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -454,7 +454,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:
