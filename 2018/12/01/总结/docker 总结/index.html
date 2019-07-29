@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="kpkym&#39;s blog">
 <meta property="og:description" content="UnionFS（联合文件系统）：Union文件系统（UnionFS）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)。Union 文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-24T12:38:40.404Z">
+<meta property="og:updated_time" content="2019-04-29T07:34:24.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 总结">
 <meta name="twitter:description" content="UnionFS（联合文件系统）：Union文件系统（UnionFS）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)。Union 文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继">
@@ -280,54 +280,18 @@
 <li>Docker容器，容器是直接提供服务的。</li>
 </ol>
 <h1 id="DockerFile体系结构-保留字指令"><a href="#DockerFile体系结构-保留字指令" class="headerlink" title="DockerFile体系结构(保留字指令)"></a>DockerFile体系结构(保留字指令)</h1><ol>
-<li>FROM<blockquote>
-<p>基础镜像，当前新镜像是基于哪个镜像的</p>
-</blockquote>
-</li>
-<li>MAINTAINER<blockquote>
-<p>镜像维护者的姓名和邮箱地址</p>
-</blockquote>
-</li>
-<li>RUN<blockquote>
-<p>容器构建时需要运行的命令</p>
-</blockquote>
-</li>
-<li>EXPOSE<blockquote>
-<p>当前容器对外暴露出的端口</p>
-</blockquote>
-</li>
-<li>WORKDIR<blockquote>
-<p>指定在创建容器后，终端默认登陆的进来工作目录，一个落脚点</p>
-</blockquote>
-</li>
-<li>ENV<blockquote>
-<p>用来在构建镜像过程中设置环境变量</p>
-</blockquote>
-</li>
-<li>ADD<blockquote>
-<p>将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包</p>
-</blockquote>
-</li>
-<li>COPY<blockquote>
-<p>类似ADD，拷贝文件和目录到镜像中。<br>将从构建上下文目录中 &lt;源路径&gt; 的文件/目录复制到新的一层的镜像内的 &lt;目标路径&gt; 位置</p>
-</blockquote>
-</li>
-<li>VOLUME<blockquote>
-<p>容器数据卷，用于数据保存和持久化工作</p>
-</blockquote>
-</li>
-<li>CMD<blockquote>
-<p>指定一个容器启动时要运行的命令<br>Dockerfile 中可以有多个 CMD 指令，但只有最后一个生效，CMD 会被 docker run 之后的参数替换</p>
-</blockquote>
-</li>
-<li>ENTRYPOINT <blockquote>
-<p>指定一个容器启动时要运行的命令<br>ENTRYPOINT 的目的和 CMD 一样，都是在指定容器启动程序及参数</p>
-</blockquote>
-</li>
-<li>ONBUILD<blockquote>
-<p>当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发</p>
-</blockquote>
-</li>
+<li><code>FROM</code> | 基础镜像，当前新镜像是基于哪个镜像的</li>
+<li><code>MAINTAINER</code> | 镜像维护者的姓名和邮箱地址</li>
+<li><code>RUN</code> | 容器构建时需要运行的命令</li>
+<li><code>EXPOSE</code> | 当前容器对外暴露出的端口</li>
+<li><code>WORKDIR</code> | 指定在创建容器后，终端默认登陆的进来工作目录，一个落脚点</li>
+<li><code>ENV</code> | 用来在构建镜像过程中设置环境变量</li>
+<li><code>ADD</code> | 将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包</li>
+<li><code>COPY</code> | 类似ADD，拷贝文件和目录到镜像中。 | 将从构建上下文目录中 &lt;源路径&gt; 的文件/目录复制到新的一层的镜像内的 &lt;目标路径&gt; 位置</li>
+<li><code>VOLUME</code> | 容器数据卷，用于数据保存和持久化工作</li>
+<li><code>CMD</code> | 指定一个容器启动时要运行的命令 | Dockerfile 中可以有多个 CMD 指令，但只有最后一个生效，CMD 会被 docker run 之后的参数替换</li>
+<li><code>ENTRYPOINT</code>  | 指定一个容器启动时要运行的命令 | ENTRYPOINT 的目的和 CMD 一样，都是在指定容器启动程序及参数</li>
+<li><code>ONBUILD</code> | 当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发</li>
 </ol>
 
       
