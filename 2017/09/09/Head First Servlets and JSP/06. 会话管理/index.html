@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>06. 会话管理 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="要点 在写至响应的HTML中，URL重写把会话ID增加到其中所有URL的最后。 会话ID作为请求URL最后的“额外”信息再通过请求返回 如果客户不接受cookie,URL重写会自动发生，但是必须显式地对所有URL编码。 要对一个URL编码，需要调用response. encodeURL(String)。 out.println(&amp;quot;&amp;lt;a href=&amp;#39;&amp;quot; + resp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06. 会话管理">
+<meta property="og:url" content="https://github.com/kpkym/2017/09/09/Head First Servlets and JSP/06. 会话管理/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="要点 在写至响应的HTML中，URL重写把会话ID增加到其中所有URL的最后。 会话ID作为请求URL最后的“额外”信息再通过请求返回 如果客户不接受cookie,URL重写会自动发生，但是必须显式地对所有URL编码。 要对一个URL编码，需要调用response. encodeURL(String)。 out.println(&amp;quot;&amp;lt;a href=&amp;#39;&amp;quot; + resp">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-16T06:50:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="06. 会话管理">
+<meta name="twitter:description" content="要点 在写至响应的HTML中，URL重写把会话ID增加到其中所有URL的最后。 会话ID作为请求URL最后的“额外”信息再通过请求返回 如果客户不接受cookie,URL重写会自动发生，但是必须显式地对所有URL编码。 要对一个URL编码，需要调用response. encodeURL(String)。 out.println(&amp;quot;&amp;lt;a href=&amp;#39;&amp;quot; + resp">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Head First Servlets and JSP/06. 会话管理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/09/Head First Servlets and JSP/06. 会话管理/" class="article-date">
+  <time datetime="2017-09-08T16:59:43.000Z" itemprop="datePublished">2017-09-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      06. 会话管理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h1><ul>
+<li>在写至响应的HTML中，URL重写把会话ID增加到其中所有URL的最后。</li>
+<li>会话ID作为请求URL最后的“额外”信息再通过请求返回</li>
+<li>如果客户不接受cookie,URL重写会自动发生，但是必须显式地对所有URL编码。</li>
+<li>要对一个URL编码，需要调用response. encodeURL(String)。</li>
+<li><code>out.println(&quot;&lt;a href=&#39;&quot; + response.encodeURL(&quot;/BeerTest.do&quot;) + &quot;&#39;&gt;click  me&lt;/a &gt;&quot;)</code> ;</li>
+<li>没有办法对静态页面完成自动的URL 重写，所以，如果你依赖于会话，就必须使用动态生成的页面。</li>
+<li>重定向 <code>response.encodeRedirectURL(&quot;res.jsp&quot;)</code>;</li>
+</ul>
+<a id="more"></a>
+<h1 id="设置会话超时"><a href="#设置会话超时" class="headerlink" title="设置会话超时"></a>设置会话超时</h1><p>好消息: 你不用自己来跟踪。看到上一页的那些方法了吗? 无需你使用这些方法来删除无用的(不活动的) 会话。这些事情容器会为你做的。</p>
+<p>会话有3种死法:</p>
+<ol>
+<li>超时。</li>
+<li>你在会话对象上调用invalidate()。</li>
+<li>应用丝束(崩溃或取消部署)</li>
+</ol>
+<h2 id="在DD中配置会话超时"><a href="#在DD中配置会话超时" class="headerlink" title="在DD中配置会话超时"></a>在DD中配置会话超时</h2><p>在DD中配置会话超时与在所创建的每一个会话上调HsetMaxInactiveInterval()有同样的效果。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 5分钟过期 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>15<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="设置一个特定会话的会话超时"><a href="#设置一个特定会话的会话超时" class="headerlink" title="设置一个特定会话的会话超时"></a>设置一个特定会话的会话超时</h2><p>如果你想改变某个特定会话实例的session-timeout值(而不影响应用中其他会话的超时时间): <code>session.setMaxInactiveInterval(20 * 60)</code>;</p>
+<p><strong>不要把Cookie和首部混为一谈</strong></p>
+<p>向响应增加一个首部时，要把名和值String作为参数传入: <code>response.addHeader(&quot;foo&quot;,&quot;bar&quot;)</code>;<br>但是向响应增加一个Cookie时，要传递一个Cookie对象。需要在Cookie构造函数中设置Cookie名和值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = newCookie(<span class="string">"name"</span>,name);</span><br><span class="line">response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+<p>还要记住，对于首部既有<code>setHeader()</code>方法，又有<code>addHeader()</code>方祛(如果已经有这个首部，addHeader会向这个现有的首部增加一个值，而setHeader会替换现有的值)。但是不存在<code>setCookie()</code>方法。只有一个<code>addCookie()</code>方祛!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2017/09/09/Head First Servlets and JSP/06. 会话管理/" data-id="ckkdeehb70003p5jzu1y2wd02" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/11/Head First Servlets and JSP/07. JSP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          07. JSP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/31/Head First Servlets and JSP/05. 属性和监听者/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">05. 属性和监听者</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

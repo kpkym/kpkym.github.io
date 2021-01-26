@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Linux 总结 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux 系统启动过程 内核的引导。 当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。   运行 init。 init 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。init 程序首先是需要读取配置文件 /etc/inittab。">
+<meta name="keywords" content="总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 总结">
+<meta property="og:url" content="https://github.com/kpkym/2018/03/01/总结/Linux/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="Linux 系统启动过程 内核的引导。 当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。   运行 init。 init 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。init 程序首先是需要读取配置文件 /etc/inittab。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-29T06:54:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 总结">
+<meta name="twitter:description" content="Linux 系统启动过程 内核的引导。 当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。   运行 init。 init 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。init 程序首先是需要读取配置文件 /etc/inittab。">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-总结/Linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/01/总结/Linux/" class="article-date">
+  <time datetime="2018-03-01T02:12:42.000Z" itemprop="datePublished">2018-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux-系统启动过程"><a href="#Linux-系统启动过程" class="headerlink" title="Linux 系统启动过程"></a>Linux 系统启动过程</h1><ol>
+<li>内核的引导。<blockquote>
+<p>当计算机打开电源后，首先是BIOS开机自检，按照BIOS中设置的启动设备（通常是硬盘）来启动。<br>操作系统接管硬件以后，首先读入 /boot 目录下的内核文件。</p>
+</blockquote>
+</li>
+<li>运行 init。<blockquote>
+<p>init 进程是系统所有进程的起点，你可以把它比拟成系统所有进程的老祖宗，没有这个进程，系统中任何进程都不会启动。<br>init 程序首先是需要读取配置文件 /etc/inittab。</p>
+</blockquote>
+</li>
+<li>系统初始化。<blockquote>
+<p>许多程序需要开机启动。它们在Windows叫做”服务”（service），在Linux就叫做”守护进程”（daemon）。<br>init进程的一大任务，就是去运行这些开机启动的程序。<br>但是，不同的场合需要启动不同的程序，比如用作服务器时，需要启动Apache，用作桌面就不需要。<br>Linux允许为不同的场合，分配不同的开机启动程序，这就叫做”运行级别”（runlevel）。也就是说，启动时根据”运行级别”，确定要运行哪些程序。</p>
+<blockquote>
+<p>Linux系统有7个运行级别(runlevel)：<br>运行级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动<br>运行级别1：单用户工作状态，root权限，用于系统维护，禁止远程登陆<br>运行级别2：多用户状态(没有NFS)<br>运行级别3：完全的多用户状态(有NFS)，登陆后进入控制台命令行模式<br>运行级别4：系统未使用，保留<br>运行级别5：X11控制台，登陆后进入图形GUI模式<br>运行级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</p>
+</blockquote>
+</blockquote>
+</li>
+<li>建立终端 。</li>
+<li>用户登录系统。</li>
+</ol>
+<h2 id="运行级别说明"><a href="#运行级别说明" class="headerlink" title="运行级别说明:"></a>运行级别说明:</h2><blockquote>
+<p><code>0.</code> 关机<br><code>1.</code> 单用户【找回丢失密码】<br><code>2.</code> 多用户状态没有网络服务<br><code>3.</code> 多用户状态有网络服务<br><code>4.</code> 系统未使用保留给用户<br><code>5.</code> 图形界面<br><code>6.</code> 系统重启</p>
+</blockquote>
+<blockquote>
+<p>常用运行级别是 3 和 5 ，要修改默认的运行级别可改文件 /etc/inittab 的 id:5:initdefault:这一行中的数字</p>
+</blockquote>
+<p><strong>强制覆盖不提示的方法:\cp</strong></p>
+<h1 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h1><p>-e 编辑  |  -l 查询  | -r 删除</p>
+<ol>
+<li>cron -e</li>
+<li>*/1<em>**</em>ls-l/etc&gt;&gt;/tmp/to.txt</li>
+<li>当保存退出后就程序。</li>
+<li>在每一分钟都会自动的调用 ls -l /etc &gt;&gt; /tmp/to.txt</li>
+</ol>
+<blockquote>
+<p>分 时 日 月 星期 要运行的命令<br>第1列分钟0～59<br>第2列小时0～23（0表示子夜）<br>第3列日1～31<br>第4列月1～12<br>第5列星期0～7（0和7表示星期天）<br>第6列要运行的命令</p>
+<blockquote>
+<p>minute   hour   day   month   week   command</p>
+</blockquote>
+</blockquote>
+<p>其中：</p>
+<blockquote>
+<p>minute： 表示分钟，可以是从0到59之间的任何整数。<br>hour：表示小时，可以是从0到23之间的任何整数。<br>day：表示日期，可以是从1到31之间的任何整数。<br>month：表示月份，可以是从1到12之间的任何整数。<br>week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。<br>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</p>
+</blockquote>
+<p>在以上各个字段中，还可以使用以下特殊字符：<br>星号（<em>）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。<br>逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”<br>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”<br>正斜线（/）$$：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如</em>/10，如果用在minute字段，表示每十分钟执行一次。</p>
+<h1 id="SCSI"><a href="#SCSI" class="headerlink" title="SCSI"></a>SCSI</h1><ol start="2">
+<li>对于 IDE 硬盘，驱动器标识符为“hdx~”,其中“hd”表明分区所在设备的类型，这里是指 IDE 硬 盘了。“x”为盘号(a 为基本盘，b 为基本从属盘，c 为辅助主盘，d 为辅助从属盘),“~”代表分区， 前四个分区用数字 1 到 4 表示，它们是主分区或扩展分区，从 5 开始就是逻辑分区。例，hda3 表示为 第一个 IDE 硬盘上的第三个主分区或扩展分区,hdb2 表示为第二个 IDE 硬盘上的第二个主分区或扩展 分区。</li>
+<li>对于 SCSI 硬盘则标识为“sdx~”，SCSI 硬盘是用“sd”来表示分区所在设备的类型的，其余则 和 IDE 硬盘的表示方法一样。</li>
+</ol>
+<h2 id="如何增加一块硬盘"><a href="#如何增加一块硬盘" class="headerlink" title="如何增加一块硬盘"></a>如何增加一块硬盘</h2><ol>
+<li>虚拟机添加硬盘</li>
+<li>分区 fdisk /dev/sdb</li>
+<li>格式化 mkfs -t ext4 /dev/sdb1</li>
+<li>挂载 先创建一个 /home/newdisk , 挂载 mount /dev/sdb1 /home/newdisk 5)设置可以自动挂载(永久挂载，当你重启系统，仍然可以挂载到 /home/newdisk) 。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/fstab</span><br><span class="line">/dev/sdb1 /home/newdisk ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
+<p><strong>查询系统整体磁盘使用情况 df -lh</strong></p>
+<h2 id="查看服务名"><a href="#查看服务名" class="headerlink" title="查看服务名"></a>查看服务名</h2><ul>
+<li>方式 1:使用 setup -&gt; 系统服务 就可以看到。</li>
+<li>方式 2: /etc/init.d/服务名称</li>
+</ul>
+<h1 id="查看或者修改默认级别-vi-etc-inittab"><a href="#查看或者修改默认级别-vi-etc-inittab" class="headerlink" title="查看或者修改默认级别: vi /etc/inittab"></a>查看或者修改默认级别: vi /etc/inittab</h1><p><strong>Linux 系统有 7 种运行级别(runlevel):常用的是级别 3 和 5</strong></p>
+<ul>
+<li>运行级别 0:系统停机状态，系统默认运行级别不能设为 0，否则不能正常启动</li>
+<li>运行级别 1:单用户工作状态，root 权限，用于系统维护，禁止远程登陆</li>
+<li>运行级别 2:多用户状态(没有 NFS)，不支持网络</li>
+<li>运行级别 3:完全的多用户状态(有 NFS)，登陆后进入控制台命令行模式</li>
+<li>运行级别 4:系统未使用，保留</li>
+<li>运行级别 5:X11 控制台，登陆后进入图形 GUI 模式</li>
+<li>运行级别 6:系统正常关闭并重启，默认运行级别不能设为 6，否则不能正常启动</li>
+</ul>
+<p><strong>通过 chkconfig 命令可以给每个服务的各个运行级别设置自启动/关闭</strong></p>
+<p><strong>查看系统网络情况 netstat</strong></p>
+<blockquote>
+<p>-an 按一定顺序排列输出 -p 显示哪个进程在调用</p>
+</blockquote>
+<h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><ol>
+<li>脚本以#!/bin/bash 开头</li>
+<li>脚本需要有可执行权限</li>
+</ol>
+<h2 id="Shell-的变量的介绍"><a href="#Shell-的变量的介绍" class="headerlink" title="Shell 的变量的介绍"></a>Shell 的变量的介绍</h2><ol>
+<li>Linux Shell 中的变量分为，系统变量和用户自定义变量。</li>
+<li>系统变量:$HOME、$PWD、$SHELL、$USER 等等<blockquote>
+<p>比如: echo $HOME 等等..</p>
+</blockquote>
+</li>
+<li>显示当前 shell 中所有变量:set</li>
+</ol>
+<p><strong>单引号字符串的限制：</strong></p>
+<blockquote>
+<p>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；<br>单引号字串中不能出现单独一个的单引号（对单引号使用转义符后也不行），但可成对出现，作为字符串拼接使用。</p>
+</blockquote>
+<p><strong>双引号的优点：</strong></p>
+<blockquote>
+<p>双引号里可以有变量<br>双引号里可以出现转义字符</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取字符串长度</span></span><br><span class="line">string=<span class="string">"abcd"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#string&#125;</span> <span class="comment">#输出 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取子字符串</span></span><br><span class="line"><span class="comment"># 以下实例从字符串第 2 个字符开始截取 4 个字符：</span></span><br><span class="line">string=<span class="string">"runoob is a great site"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;string:1:4&#125;</span> <span class="comment"># 输出 unoo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找子字符串</span></span><br><span class="line"><span class="comment"># 查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)：</span></span><br><span class="line">string=<span class="string">"runoob is a great site"</span></span><br><span class="line"><span class="built_in">echo</span> `expr index <span class="string">"<span class="variable">$string</span>"</span> io`  <span class="comment"># 输出 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义数组</span></span><br><span class="line"><span class="comment"># 在 Shell 中，用括号来表示数组，数组元素用"空格"符号分割开。定义数组的一般形式为：</span></span><br><span class="line"><span class="comment"># 数组名=(值1 值2 ... 值n)</span></span><br><span class="line"><span class="comment"># 读取数组</span></span><br><span class="line"><span class="comment"># 读取数组元素值的一般格式是：</span></span><br><span class="line"><span class="variable">$&#123;数组名[下标]&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 @ 符号可以获取数组中的所有元素，例如：</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;array_name[@]&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取数组的长度</span></span><br><span class="line"><span class="comment"># 获取数组长度的方法与获取字符串长度的方法相同，例如：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># $n (功能描述:n 为数字，$0 代表命令本身，$1-$9 代表第一到第九个参数，十以上的参数，十 以上的参数需要用大括号包含，如$&#123;10&#125;)</span></span><br><span class="line"><span class="comment"># $* (功能描述:这个变量代表命令行中所有的参数，$*把所有的参数看成一个整体) $@(功能描述:这个变量也代表命令行中所有的参数，不过$@把每个参数区分对待) $#(功能描述:这个变量代表命令行中所有参数的个数)</span></span><br></pre></td></tr></table></figure>
+<h2 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h2><blockquote>
+<p>就是 shell 设计者事先已经定义好的变量，可以直接在 shell 脚本中使用</p>
+</blockquote>
+<blockquote>
+<p>$$ (功能描述:当前进程的进程号(PID))<br>$! (功能描述:后台运行的最后一个进程的进程号(PID))<br>$? (功能描述:最后一次执行的命令的返回状态。如果这个变量的值为 0，证明上一个命令</p>
+<blockquote>
+<p>正确执行;如果这个变量的值为非 0(具体是哪个数，由命令自己来决定)，则证明上一个命令 执行不正确了。)</p>
+</blockquote>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取得数组元素的个数</span></span><br><span class="line">length=<span class="variable">$&#123;#array_name[@]&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">length=<span class="variable">$&#123;#array_name[*]&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 取得数组单个元素的长度</span></span><br><span class="line">lengthn=<span class="variable">$&#123;#array_name[n]&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h2><p>多行注释还可以使用以下格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">:&lt;&lt;EOF</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">EOF</span><br><span class="line">EOF 也可以使用其他符号:</span><br><span class="line"></span><br><span class="line">:&lt;&lt;&apos;</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:&lt;&lt;!</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">!</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>定义变量:变量=值</li>
+<li>撤销变量:unset 变量</li>
+<li>声明静态变量:readonly 变量，注意:不能 unset</li>
+</ol>
+<h2 id="将命令的返回值赋给变量-重点"><a href="#将命令的返回值赋给变量-重点" class="headerlink" title="将命令的返回值赋给变量(重点)"></a>将命令的返回值赋给变量(重点)</h2><ol>
+<li>A=<code>ls -la</code> 反引号，运行里面的命令，并把结果返回给变量 A</li>
+<li>A=$(ls -la) 等价于反引号</li>
+</ol>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ol>
+<li>“$((运算式))”或“$[运算式]”</li>
+<li>expr m + n<blockquote>
+<p><strong>注意 expr 运算符间要有空格</strong></p>
+</blockquote>
+</li>
+<li>expr m - n</li>
+<li>expr *, /, % 乘，除，取余</li>
+</ol>
+<h2 id="判断语句"><a href="#判断语句" class="headerlink" title="判断语句"></a>判断语句</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ condition ](注意 condition 前后要有空格)</span><br><span class="line"><span class="comment"># 非空返回 true，可使用$?验证(0 为 true，&gt;1 为 false)</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2018/03/01/总结/Linux/" data-id="ckkdeehbm000lp5jz5pbq3pyw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/17/计算机网络/5 第五章 运输层/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          运输层
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/12/计算机网络/4 第四章 网络层/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络层</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

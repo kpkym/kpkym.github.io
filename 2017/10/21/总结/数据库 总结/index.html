@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>数据库 总结 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本查询SELECT * FROM TABLE;SELECT DISTINCT COLUMN FROM TABLE;SELECT * FROM emp WHERE empno IN(1, 2, 3);   在IN之中使用NULL —— 在没有任何的影响， 在NOT NULL之中使用NULL —— 不满足的原因是数据库自身的保护机制，避免大数据所带来的问题。">
+<meta name="keywords" content="总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库 总结">
+<meta property="og:url" content="https://github.com/kpkym/2017/10/21/总结/数据库 总结/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="基本查询SELECT * FROM TABLE;SELECT DISTINCT COLUMN FROM TABLE;SELECT * FROM emp WHERE empno IN(1, 2, 3);   在IN之中使用NULL —— 在没有任何的影响， 在NOT NULL之中使用NULL —— 不满足的原因是数据库自身的保护机制，避免大数据所带来的问题。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-06T06:49:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库 总结">
+<meta name="twitter:description" content="基本查询SELECT * FROM TABLE;SELECT DISTINCT COLUMN FROM TABLE;SELECT * FROM emp WHERE empno IN(1, 2, 3);   在IN之中使用NULL —— 在没有任何的影响， 在NOT NULL之中使用NULL —— 不满足的原因是数据库自身的保护机制，避免大数据所带来的问题。">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-总结/数据库 总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/21/总结/数据库 总结/" class="article-date">
+  <time datetime="2017-10-21T06:51:44.000Z" itemprop="datePublished">2017-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据库 总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h1><p><code>SELECT * FROM TABLE;</code><br><code>SELECT DISTINCT COLUMN FROM TABLE;</code><br><code>SELECT * FROM emp WHERE empno IN(1, 2, 3);</code></p>
+<blockquote>
+<ol>
+<li>在IN之中使用NULL —— 在没有任何的影响，</li>
+<li>在NOT NULL之中使用NULL —— 不满足的原因是数据库自身的保护机制，避免大数据所带来的问题。</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h1 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h1><p><code>SELECT *　FROM emp WHRER ename LIKE &quot;A%&quot;;</code></p>
+<p>“_”:匹配任意一个字符,   “%”:匹配0个、1个或多个任意字符。</p>
+<p><code>SELECT * FROM emp ORDER BY sal ASC(默认); \ DEAS;</code></p>
+<p><strong>在数据量大的时候绝对不要采用多表查询，而且就算是数据量小，也别用多表查询。</strong></p>
+<p>COUNT(*):会实际的统计出表的数据量；</p>
+<p>COUNT(字段):如果统计的字段上不包含有null,那么与COUNT(*)结果相同；如果统计的字段上包含有null,null不参与统计；</p>
+<p>COUNT(DISTINCT 字段)：消除掉重复数据后的统计</p>
+<p>执行顺序:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>  [<span class="keyword">DISTINCT</span>] *| 列名称  [别名 ] ,  列名称 [别名 ] ,.... | 统计函数 ?  <span class="number">5</span>、确定查询列</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">FROM</span> 数据表 [别名 ] ,数据表 [别名 ]... ?                              <span class="number">1</span>、数据来源</span><br><span class="line">[<span class="keyword">WHERE</span> 条件 (s)]?                                                        <span class="number">2</span>、过滤数据行</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> 分组字段,分组字段 ,...] ?                                        <span class="number">3</span>、执行分组操作</span><br><span class="line">[<span class="keyword">HAVING</span> 分组后过滤]                                                       <span class="number">4</span>、针对分组后的数据过滤</span><br><span class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> 字段[<span class="keyword">ASC</span> | <span class="keyword">DESC</span>], 字段[<span class="keyword">ASC</span> | <span class="keyword">DESC</span>],...]                         <span class="number">6</span>、数据排序</span><br></pre></td></tr></table></figure></p>
+<h1 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> job, <span class="keyword">AVG</span>(sal), <span class="keyword">MAX</span>(sal), <span class="keyword">MIN</span>(sal), <span class="keyword">COUNT</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> emp</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> job;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提示：关于统计查询的几个重要说明，<br>以上的代码只是根据基础语法实现了统计的操作，但是在整个操作之中还会存在有三个显示：</p>
+<ol>
+<li>限制一：统计函数单独使用时（没有GROUP By字句）只能够出现统计函数，不能够出现其他字段</li>
+<li>限制二：使用统计查询时（存在GROUP BY 字句），SELECT子句之中之允许出现统计函数与字段，</li>
+<li>限制三：统计函数在分组之中可以嵌套使用，但是嵌套之后的统计查询之中，SELECT子句中不循序再出现任何的字段，包括分组字段。</li>
+</ol>
+</blockquote>
+<ul>
+<li>WHERE子句：是在分组前使用，而且不能够使用统计函数进行验证，经过WHERE筛选后的数据才可以分组；</li>
+<li>HAVING子句：必须结合GROUP BY 子句一起出现，是在分组后的过滤，可以使用统计函数。 </li>
+</ul>
+<h1 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h1><h2 id="关于子查询的时候，给出一些参考方式，供选择（95-的问题都可以解决"><a href="#关于子查询的时候，给出一些参考方式，供选择（95-的问题都可以解决" class="headerlink" title="关于子查询的时候，给出一些参考方式，供选择（95%的问题都可以解决):"></a>关于子查询的时候，给出一些参考方式，供选择（95%的问题都可以解决):</h2><p>子查询返回单行单列：HAVING、WHERE<br>子查询返回多行单列：WHERE<br>子查询返回多行多列：FROM</p>
+<h2 id="子查询返回单行列"><a href="#子查询返回单行列" class="headerlink" title="子查询返回单行列"></a>子查询返回单行列</h2><p>要求统计出所有高于公司平均工资的全部雇员信息<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(sal)<span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> sal&gt;(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(sal) <span class="keyword">FROM</span> emp);</span><br></pre></td></tr></table></figure></p>
+<h2 id="子查询返回单行多列（了解）"><a href="#子查询返回单行多列（了解）" class="headerlink" title="子查询返回单行多列（了解）"></a>子查询返回单行多列（了解）</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> (hiredate, sal)=(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MIN</span>(hiredate), <span class="keyword">MIN</span>(sal) <span class="keyword">FROM</span> emp);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> (sal,job)=(</span><br><span class="line"><span class="keyword">SELECT</span> sal, job <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> <span class="keyword">name</span>=<span class="string">'SCOTT'</span>)</span><br><span class="line"><span class="keyword">AND</span> ename &lt;&gt; <span class="string">'SCOTT'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="子查询返回多行单列-IN"><a href="#子查询返回多行单列-IN" class="headerlink" title="子查询返回多行单列 IN"></a>子查询返回多行单列 IN</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> sal <span class="keyword">IN</span>(</span><br><span class="line"><span class="keyword">SELECT</span> sal <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> job=<span class="string">'MANAGER'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> sal <span class="keyword">NOT</span> <span class="keyword">IN</span> (</span><br><span class="line"><span class="keyword">SELECT</span> sal <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> job=<span class="string">'MANAGER'</span>);</span><br></pre></td></tr></table></figure>
+<p><em>此时 有一个需要注意的小问题了：在使用 NOT IN的时候子查询之中必须不能包含 null ，否则不会有任何数据返回。</em></p>
+<ul>
+<li>=ANY: 此功能与IN操作完全一样</li>
+<li>>ANY: 比子查询的最小值要大</li>
+<li>&lt;ANY：比子查询的最大值还要小</li>
+<li>>ALL: 比子查询返回的最大值还要大</li>
+<li>&lt;ALL: 比子查询最小值还要小</li>
+</ul>
+<p>如果使用了 HAVING子句一定意味着进行了分组，而且统计查询。在 HAVING之中出现的子查询只能够返回 单行列的数据:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> deptno,<span class="keyword">AVG</span>(sal) <span class="keyword">FROM</span> emp <span class="keyword">GROUP</span> <span class="keyword">BY</span> deptno</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">AVG</span>(sal)&gt;(</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(sal) <span class="keyword">FROM</span> emp);</span><br></pre></td></tr></table></figure></p>
+<h2 id="在FROM-子句之中使用子查询"><a href="#在FROM-子句之中使用子查询" class="headerlink" title="在FROM 子句之中使用子查询"></a><strong>在FROM 子句之中使用子查询</strong></h2><h3 id="实现方法一：利用多表查询"><a href="#实现方法一：利用多表查询" class="headerlink" title="实现方法一：利用多表查询"></a>实现方法一：利用多表查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> d.deptno, d.dname, d.loc, <span class="keyword">COUNT</span>(e.empno), <span class="keyword">AVG</span>(e.sal)</span><br><span class="line"><span class="keyword">FROM</span> emp e, dept d</span><br><span class="line"><span class="keyword">WHERE</span> e.deptno(+)= d.deptno</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> d.deptno, d.dname, d.loc;</span><br></pre></td></tr></table></figure>
+<h3 id="实现方法二：采用子查询完成"><a href="#实现方法二：采用子查询完成" class="headerlink" title="实现方法二：采用子查询完成"></a>实现方法二：采用子查询完成</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> d.deptno, d.dname, d.loc, temp.cout, temp,<span class="keyword">avg</span></span><br><span class="line"><span class="keyword">FROM</span> dept d,(</span><br><span class="line"><span class="keyword">SELECT</span> deptno, <span class="keyword">COUNT</span>(empno), <span class="keyword">AVG</span>(sal) </span><br><span class="line"><span class="keyword">FROM</span> emp</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> deptno)temp</span><br><span class="line"><span class="keyword">WHERE</span> d.deptno=temp.deptno(+);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>LEFT JOIN或LEFT OUTER JOIN<blockquote>
+<p>左向外联接的结果集包括  LEFT OUTER子句中指定的左表的所有行，而不仅仅是联接列所匹配的行。如果左表的某行在右表中没有匹配行，则在相关联的结果集行中右表的所有选择列表列均为空值。       </p>
+</blockquote>
+</li>
+<li>RIGHT  JOIN 或 RIGHT  OUTER  JOIN<blockquote>
+<p>右向外联接是左向外联接的反向联接。将返回右表的所有行。如果右表的某行在左表中没有匹配行，则将为左表返回空值。   </p>
+</blockquote>
+</li>
+</ol>
+<p><strong>Oracle 伪列ROWNUM  ROWID</strong></p>
+<p><strong>约束</strong><br><code>CONSTRAINT uk_email UNIQUE(email)</code><br><code>CONSTRAINT pk_mid PRIMARY KEY(mid)</code><br><code>CONSTRAINT ck_age CHECK(age BETTWEEN 0 AND 250)</code><br>一般不这么用，在程序里检查</p>
+<p><code>CONSTRAINT fk_mid FOREIGN KEY(mid) REFERENCES member(mid)</code></p>
+<h1 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h1><p><a href="http://www.cnblogs.com/saobchj/archive/2012/05/06/2486571.html" target="_blank" rel="noopener">Oracle实现序列</a></p>
+<p>CREATE SEQUENCE 序列名称</p>
+<ul>
+<li>取得序列下一个增长数据(每次调用序列值都增长制定的步长)：序列.nextval</li>
+<li>取得序列当前数据(每次调用序列值都不会增长)：序列.currval<blockquote>
+<p>在使用currval之前一定要首先使用nextval 不然会报错 CURRVAL尚未在此会话中定义,实际上当用户每次进行数据增长控制的时候，LAST_NUMBER 都表示已经处理完的一批序列内容，当当前序列的数值等于了LAST_NUMBER数据时，那么会自动再增加指定个”CACHE” 大小的序列但是有序数据有存在缓存的问题，所以当数据库重新启动之后，那么所操作的序列就可能出现调好的情况。如果想要避免调好的问题出现，那么最简单的做法是取消缓存，使用NOCACHE表示</p>
+</blockquote>
+</li>
+<li>INSERT INTO matab(mid, title) VALUES(myseq.nextval, ‘JAVA’);</li>
+</ul>
+<h1 id="了解就行"><a href="#了解就行" class="headerlink" title="了解就行"></a>了解就行</h1><p>增加表约束<br><code>ALTER TABLE 表名称 ADD CONSTRAINT 约束名称 约束类型(约束名称)[选项]</code><br><code>ALTER TABLE member ADD CONSTRAINT pk_mid PRIMARY KEY(mid)</code></p>
+<p>删除约束<br><code>ALTER TABLE 表名称 DROP CONSTRAINT 约束名称</code><br><code>ALTER TABLE member DROP CONSTRAINT pk_mid</code></p>
+<p><strong>视图不是真实数据，而是真实数据的映射。    不要做查询以外的操作</strong>    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2017/10/21/总结/数据库 总结/" data-id="ckkdeehbe000ap5jz7s2400fj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/24/计算机网络/1 第一章 概述/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          概述
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/21/Head First Servlets and JSP/11. 部署Web应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">11. 部署Web应用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

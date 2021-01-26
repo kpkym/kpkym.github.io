@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>算法(2.3 快速排序) | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="快速排序快速排序引人注目的特点包括它是原地排序（只需要一个很小的辅助栈），且将长度为N的数组排序所需的时间和NloN成正比。 它的主要缺点是非常脆弱，在实现时要非常小心才能避免低劣的性能。 快速排序时一种分治的排序算法。它将一个数组分成两个子数组，将两部分独立地排序。  快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序；而快速排序将数组排序的方">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法(2.3 快速排序)">
+<meta property="og:url" content="https://github.com/kpkym/2017/08/06/算法/算法(2.3 快速排序)/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="快速排序快速排序引人注目的特点包括它是原地排序（只需要一个很小的辅助栈），且将长度为N的数组排序所需的时间和NloN成正比。 它的主要缺点是非常脆弱，在实现时要非常小心才能避免低劣的性能。 快速排序时一种分治的排序算法。它将一个数组分成两个子数组，将两部分独立地排序。  快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序；而快速排序将数组排序的方">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20170806153425695?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva3BreW0=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2018-12-02T07:32:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法(2.3 快速排序)">
+<meta name="twitter:description" content="快速排序快速排序引人注目的特点包括它是原地排序（只需要一个很小的辅助栈），且将长度为N的数组排序所需的时间和NloN成正比。 它的主要缺点是非常脆弱，在实现时要非常小心才能避免低劣的性能。 快速排序时一种分治的排序算法。它将一个数组分成两个子数组，将两部分独立地排序。  快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序；而快速排序将数组排序的方">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170806153425695?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva3BreW0=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-算法/算法(2.3 快速排序)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/06/算法/算法(2.3 快速排序)/" class="article-date">
+  <time datetime="2017-08-06T07:30:05.000Z" itemprop="datePublished">2017-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      算法(2.3 快速排序)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>快速排序引人注目的特点包括它是原地排序（只需要一个很小的辅助栈），且将长度为N的数组排序所需的时间和NloN成正比。</p>
+<p><em>它的主要缺点是非常脆弱，在实现时要非常小心才能避免低劣的性能。</em></p>
+<p>快速排序时一种分治的排序算法。它将一个数组分成两个子数组，将两部分独立地排序。</p>
+<blockquote>
+<p>快速排序和归并排序是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序；<br>而快速排序将数组排序的方式则是当两个子数组都有序时整个数组也就自然有序了。</p>
+</blockquote>
+<ul>
+<li>在第一种情况中（归并排序），递归调用发生在处理整个数组之前</li>
+<li>在第二种情况中（快速排序），递归调用发生在处理整个数组之后</li>
+</ul>
+<p>在递归排序中，一个数组被等分为两半；在快速排序中，切分的位置区别于数组的内容。</p>
+<a id="more"></a> 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Quick</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// StdRandom.shuffle();  没找到这货在哪</span></span><br><span class="line">        sort(a, <span class="number">0</span>, a.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hi &lt;= lo) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> j = partition(a, lo, hi);</span><br><span class="line">        <span class="comment">// 将左半部分排序</span></span><br><span class="line">        sort(a, lo, j - <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 将右半部分排序  </span></span><br><span class="line">        sort(a, j + <span class="number">1</span>, hi);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 将数组切分为a[lo..i-1], a[i], a[i+1..hi]</span></span><br><span class="line">        <span class="comment">// 左右扫描指针</span></span><br><span class="line">        <span class="keyword">int</span> i = lo, j = hi + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 切分元素</span></span><br><span class="line">        Comparable v = a[lo];</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 扫描左右，检查扫描是否结束并交换元素</span></span><br><span class="line">            <span class="keyword">while</span> (less(a[++i], v)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i == hi) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (less(v, a[--j])) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j == lo) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= j) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            exch(a, i, j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将v = a[j]放入正确的位置</span></span><br><span class="line">        exch(a, lo, j);</span><br><span class="line">        <span class="comment">// a[lo..j-1] &lt;= a[j] &lt;= a[j+1..hi] 达成</span></span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">less</span><span class="params">(Comparable v, Comparable w)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> v.compareTo(w) &lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">exch</span><span class="params">(Comparable[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        Comparable t = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            System.out.print(a[i] + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isSorted</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (less(a[i], a[i - <span class="number">1</span>])) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = <span class="number">10</span>;</span><br><span class="line">        Integer[] a = <span class="keyword">new</span> Integer[N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            a[i] = (<span class="keyword">int</span>) (Math.random() * <span class="number">100</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        show(a);</span><br><span class="line">        sort(a);</span><br><span class="line">        show(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="算法改进"><a href="#算法改进" class="headerlink" title="算法改进"></a>算法改进</h1><h2 id="切换到插入排序"><a href="#切换到插入排序" class="headerlink" title="切换到插入排序"></a>切换到插入排序</h2><blockquote>
+<p>和大多数递归算法一样，改进快速排序性能的一个简单办法基于以下两点：</p>
+<ul>
+<li>对于小数组，快速排序比插入排序慢</li>
+<li>因为递归，快速排序的sort()方法在小数组中也会地调用自己</li>
+</ul>
+</blockquote>
+<p>因此，在排序小数组是时应该切换到插入排序。简单地改动算法2.5就可以做到这一点：<br>将sort()中的语句<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (hi &lt;= lo) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>替换成下面这条语句来对小数组使用插入排序：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (hi &lt;= lo + M) &#123;</span><br><span class="line">    Insertion.sort(a, lo, hi);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>转换参数M的最佳值是和系统相关的，但是5~15之间的任意值在大多数情况下都能令人满意。</em></p>
+<h2 id="三取样切分"><a href="#三取样切分" class="headerlink" title="三取样切分"></a>三取样切分</h2><p>改进快速排序性能的第二个办法是使用子数组的一小部分元素的中位数来切分数组。这样做得到的切分更好，但代价是需要计算中位数。人们发现将取样大小设为3 并用大小居中的元素切分的效果最好,我们还可以将取样元素放在数组末尾作为“哨兵”来去掉partition()中的数组边界测试。</p>
+<h2 id="熵最优的排序"><a href="#熵最优的排序" class="headerlink" title="熵最优的排序"></a>熵最优的排序</h2><p>实际应用中经常会出现含有大量重复元素的数组，例如我们可能需要将大量人员资料按照生日排序，或是按照性别区分开来。在这些情况下，我们实现的快速排序的性能尚可，但还有巨大的改进空间。例如，一个元素全部重复的子数组就不需要继续排序了，但我们的算法还会继续将它切分为更小的数组。在有大量重复元素的情况下，快速排序的递归性会使元素全部重复的子数组经常出现，这就有很大的改进潜力，将当前实现的线性对数级的性能提高到线性级别。一个简单的想法是将效组切分为三部分，分别对应小于、等于和大于切分元素的数组元素。</p>
+<p>Djksta 的解法如“三向切分的快速排序”中极为简洁的切分代码所示。它从左到右遍历数组一次，维护一个指针lt 使得a[lo..1t-1] 中的元素都小于V，一个指针gt 使得a[gt+1..hi] 中的元素都大于v，一个指针i使得a[1t..i-1] 中的元素都等于V,a[i..gt] 中的元素都还未确定，<br>如图2.3.4所示。一开始i和lo 相等，我们使用Comparable 接口(而非1ess() )对a[i] 进行三向比较来直接处理以下情况</p>
+<ol>
+<li>a[i] 小于V,將a[lt] 和a[i] 交换，将lt 和i 加一;</li>
+<li>a[i] 大于V，将a[gt] 和a[i] 交换，将gt减一;</li>
+<li>a[i] 等于V,将i加一。<br>这些操作都会保证数组元素不变且缩小gt-i 的值(这样循环才会结束)。另外，除非和切分元素相等，其他元素都会被交换。</li>
+</ol>
+<p><img src="http://img.blog.csdn.net/20170806153425695?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva3BreW0=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Quick3way</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//StdRandom.shuffle();  没找到这货在哪  </span></span><br><span class="line">        sort(a, <span class="number">0</span>, a.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hi &lt;= lo) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> lt = lo, i = lo + <span class="number">1</span>, gt = hi;</span><br><span class="line">        Comparable v = a[lo];</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= gt) &#123;</span><br><span class="line">            <span class="keyword">int</span> cmp = a[i].compareTo(v);</span><br><span class="line">            <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                exch(a, lt++, i++);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                exch(a, i, gt--);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;   <span class="comment">//现在a[lo..lt-1] &lt; v = a[lt..gt] &lt; a[gt+1..hi]成立  </span></span><br><span class="line">            sort(a, lo, lt - <span class="number">1</span>);</span><br><span class="line">            sort(a, gt + <span class="number">1</span>, hi);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">exch</span><span class="params">(Comparable[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        Comparable t = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            System.out.print(a[i] + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2017/08/06/算法/算法(2.3 快速排序)/" data-id="ckkdeehbi000ep5jz1ldb3hj1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/07/算法/算法(2.4 优先队列)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          算法(2.4 优先队列)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/05/设计模式/策略模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">策略模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

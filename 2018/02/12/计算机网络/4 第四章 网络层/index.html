@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>网络层 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="因特网的设计思路是这样的：网络层线上只提供简单灵活、无连接的、尽最大努力交付的数据报服务。网络层不提供服务质量的承诺。可靠性由运输层负责 网际协议IP与IP协议配套使用的还有三个协议：  地址解析协议ARP 网际控制报文协议ICMP 网际组管理协议IGMP 本来还有一个协议叫逆地址解析协议RARP，是和ARP协议配合使用的。但现在已被淘汰不使用了。    123ICMP IGMP    IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络层">
+<meta property="og:url" content="https://github.com/kpkym/2018/02/12/计算机网络/4 第四章 网络层/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="因特网的设计思路是这样的：网络层线上只提供简单灵活、无连接的、尽最大努力交付的数据报服务。网络层不提供服务质量的承诺。可靠性由运输层负责 网际协议IP与IP协议配套使用的还有三个协议：  地址解析协议ARP 网际控制报文协议ICMP 网际组管理协议IGMP 本来还有一个协议叫逆地址解析协议RARP，是和ARP协议配合使用的。但现在已被淘汰不使用了。    123ICMP IGMP    IP">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-16T17:12:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络层">
+<meta name="twitter:description" content="因特网的设计思路是这样的：网络层线上只提供简单灵活、无连接的、尽最大努力交付的数据报服务。网络层不提供服务质量的承诺。可靠性由运输层负责 网际协议IP与IP协议配套使用的还有三个协议：  地址解析协议ARP 网际控制报文协议ICMP 网际组管理协议IGMP 本来还有一个协议叫逆地址解析协议RARP，是和ARP协议配合使用的。但现在已被淘汰不使用了。    123ICMP IGMP    IP">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-计算机网络/4 第四章 网络层" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/12/计算机网络/4 第四章 网络层/" class="article-date">
+  <time datetime="2018-02-12T09:04:11.000Z" itemprop="datePublished">2018-02-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机网络/">计算机网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网络层
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>因特网的设计思路是这样的：网络层线上只提供简单灵活、无连接的、尽最大努力交付的数据报服务。网络层不提供服务质量的承诺。可靠性由运输层负责</strong></p>
+<h1 id="网际协议IP"><a href="#网际协议IP" class="headerlink" title="网际协议IP"></a>网际协议IP</h1><p>与IP协议配套使用的还有三个协议：</p>
+<ul>
+<li>地址解析协议ARP</li>
+<li>网际控制报文协议ICMP</li>
+<li>网际组管理协议IGMP<blockquote>
+<p>本来还有一个协议叫逆地址解析协议RARP，是和ARP协议配合使用的。但现在已被淘汰不使用了。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ICMP IGMP</span><br><span class="line">    IP</span><br><span class="line">        ARP</span><br></pre></td></tr></table></figure>
+<p>因此TCP/IP层体系中的网络层常常称为网际层或IP层</p>
+<p><strong>一般的概念来讲，将网络互相连接起来要使用一些中间设备。根据中间所在的层次，可以有以下四种中间设备。</strong></p>
+<ol>
+<li>物理层使用的中间设备叫做转发器。</li>
+<li>数据链路层使用的中间设备叫做网桥或桥接器</li>
+<li>网络层使用的中间设备叫做路由器</li>
+<li>在网络层以上使用的中间设备叫做网关。用网关连接两个不兼容的系统需要在高层进行协议的转换</li>
+</ol>
+<p>从IP地址的结构来看，IP地址并不仅仅指明一个主机，而是还指明了主机所连接到的网络</p>
+<a id="more"></a>
+<p><strong>减2的原因是</strong></p>
+<ol>
+<li>(A类地址的第一位一固定为0)IP地址中的全0表示“这个”。网络号字段为全0的IP地址是个保留地址，意思时“本网络”</li>
+<li>网络号为127即(01111111)保留作为本地软件换回测试 本主机的进程之间的通信之用。<br>全0主机号字段表示该IP地址是“本主机”所连接到的单个网络地址<br>全1主机号字段表示该网络上的所有主机</li>
+</ol>
+<blockquote>
+<p>B类地址前两位已固定(10)，所以不存在减2的问题但是B类地址网络地址128.0.0.0是不指派的，所以B类网络地址网络数-1, 主机数-2</p>
+</blockquote>
+<p>C类地址192.0.0.1也是不指派的所以-1, -2</p>
+<p><strong>请注意，ARP是解决同一个局域网上的主机或路由器的IP地址和硬件地址的映射问题。如果所要找的主机和源主机不在同一个局域网上。。。</strong></p>
+<p>总之在路由表中，对每一条路由最主要的是一下两个信息：<strong>(目的网络地址， 下一跳地址)</strong></p>
+<p><strong>划分子网</strong>： 网络号 子网号 主机号</p>
+<p>我们应当注意到，使用子网划分后，路由表必须包含以下三项内容：<strong>目的网络地址、子网掩码和下一跳地址</strong></p>
+<blockquote>
+<p><strong>使用子网时分组的转发&amp;&amp;使用子网时分组的转发</strong><br>在划分子网的情况下，分组转发的算法必须做相应的改动。<br>我们应当注意到，使用子网划分后，路由表必须包含以下: 三项内容: 目的网络地址、子网掩码和下一跳地址。<br>在划分子网的情况下，路由器转发分组的算法如下:</p>
+<ol>
+<li>从收到的数据报的首部提取目的的IP 地址D.</li>
+<li>先判断是否为直接交付。对路由器直接相连的网络逐个进行检查: 用各网络的子网掩码和D 逐位相“与”(AND 操作),看结果是否和相应的网络地址匹配。若匹配，则把分组进行直接交付(当然还需要把D 转换成物理地址，把数据报封装成帧发送出去),转发任务结束。<br>否则就是间接交付，执行(3)。</li>
+<li>若路由表中有目的地址为D 的特定主机路由，则把数据报传送给路由表中所指明的下一跳路由器:<br>否则，执行(4)。</li>
+<li>对路由表中的每- 一行(目的网络地址，子网掩码，下一跳地址),用其中的子网掩码和D逐位相“与”(AND 操作)，其结果为N.若N 与该行的目的网络地址匹配，则把数据报传送给该行指明的下一跳路由器: 否则，执行(5)。</li>
+<li>若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器; 否则，执行(6)。</li>
+<li>报告转发分组出错。</li>
+</ol>
+</blockquote>
+<h1 id="网际控制报文协议协议-ICMP"><a href="#网际控制报文协议协议-ICMP" class="headerlink" title="网际控制报文协议协议 ICMP"></a>网际控制报文协议协议 ICMP</h1><p>ICMP差错报告报文共有五种</p>
+<ol>
+<li>终点不可达</li>
+<li>源点抑制</li>
+<li>时间超过</li>
+<li>参数问题</li>
+<li>改变路由(重定向）</li>
+</ol>
+<h2 id="下面是不应发送ICMP差错报告报文的几种情况"><a href="#下面是不应发送ICMP差错报告报文的几种情况" class="headerlink" title="下面是不应发送ICMP差错报告报文的几种情况"></a>下面是不应发送ICMP差错报告报文的几种情况</h2><ol>
+<li>对ICMP差错报告报文不再发送ICMP差错报告报文</li>
+<li>对第一个分片的数据报报片的所有后续数据报片都不发送ICMP差错报告报文</li>
+<li>对具有多播地址的数据报都不发送ICMP差错报告报文</li>
+<li>对具体有特殊地址(如：127.0.0.0或0.0.0.0)的数据报不发送ICMP差错报告报文</li>
+</ol>
+<h2 id="常用的ICMP询问报文有两种"><a href="#常用的ICMP询问报文有两种" class="headerlink" title="常用的ICMP询问报文有两种"></a>常用的ICMP询问报文有两种</h2><ol>
+<li>回送请求和回答</li>
+<li>时间戳请求和回答</li>
+</ol>
+<p><strong>网络地址转换NAT</strong></p>
+<h1 id="本章重要概念"><a href="#本章重要概念" class="headerlink" title="本章重要概念"></a>本章重要概念</h1><ul>
+<li>TCP/IP 体系中的网络层向上只提供简单灵活的、无连接的、尽最大努力交付的数据报服务。网络层不提供服务质量的承诺，不保证分组交付的时限，所传送的分组可能出错、丢失、重复和失序。进程之间的通信的可靠性由运输层负责。</li>
+<li>IP 网是虚拟的，因为从网络层上看，IP 网好像是一个统一的、抽象的网络(实际上是异构的)。IP 层抽象的互联网屏蔽了下层网络很复杂的细节，使我们能够使用统一的、抽象的IP地址处理主机之间的通信问题。</li>
+<li>在互联网上的交付有两种: 在本网络上的直接交付(不经过路由器) 和到其他网络的间接交付(经过至少一个路由器，但最后一次一定是直接交付)。</li>
+<li>一个IP 地址在整个因特网范围内是唯一的。分类的IP 地址包括A 类、B类和C类地址(单播地址)，以及D类地址(多播地址)。E类地址未使用。</li>
+<li>分类的IP 地址由网络号字段(指明网络) 和主机号字段(指明主机) 组成。网络号字段最前面的类别位指明IP地址的类别。</li>
+<li>IP 地址是一种分等级的地址结构。IP 地址管理机构在分配IP 地址时只分配网络<br>号，而主机号则由得到该网络号的单位自行分配。路由器仅根据目的主机所连接的<br>网络号来转发分组。</li>
+<li>IP 地址标志一台主机(或路由器) 和一条链路的接口。多归属主机同时连接到两个或更多的网络上。这样的主机同时具有两个或更多的IP 地址，其网络号必须是不同的。由于一个路由器至少应当连接到两个网络，因此一一个路由器至少应当有两个不同的IP地址。</li>
+<li>按照因特网的观点，用转发器或网桥连接起来的若干个局域网仍为一个网络。所有分配到网络号的网络(不管是范围很小的局域网，还是可能覆盖很大地理范围的广域网) 都是平等的。</li>
+<li>物理地址(即硬件地址) 是数据链路层和物理层使用的地址，而IP 地址是网络层和以上各层使用的地址，是一种逻辑地址(用软件实现的)，在数据链路层看不见数据报的IP地址。</li>
+<li>IP数据报分为首部和数据两部分。首部的前一部分是固定长度，共20字节，是所有IP 数据报必须具有的(源地址、目的地址、总长度等重要字段都在固定首部中)。一些长度可变的可选字段放在固定首部的后面。</li>
+<li>IP 首部中的生存时间字段给出了IP 数据报在因特网中所能经过的最大路由器数，可防止IP数据报在互联网中无限制地兜圈子。</li>
+<li>地址解析协议ARP 把IP 地址解析为硬件地址，它解决同一个局域网上的主机或路由器的IP * 地址和硬件地址的映射问题。ARP 的高速缓存可以大大减少网络上的通信量。</li>
+<li>在因特网中，我们无法仅根据使件地址寻找到在某个网络上的某台主机。因此，从IP地址到硬件地址的解析是非常必要的。</li>
+<li>无分类域间路由选择CIDR 是解决目前IP 地址紧缺的一个好方法。CIDR 记法把IP地址后面加上斜线“/“，然后写上前缀所占的位数。前缀(或网络前缀) 用来指明网络，前缀后面的部分是后缀，用来指明主机。CIDR 把前缀都相同的连续的IP地址组成- 一个“CIDR 地址块”。IP地址的分配都以CIDR 地址块为单位。</li>
+<li>CIDR的32 位地址掩码(或子网掩码) 由一串1和一串0组成，而1的个数就是前缀的长度。只要把IP 地址和地址掩码逐位进行“逻辑与(AND)” 运算，就很容易得出网络地址。A类地址的默认地址掩码是255.0.0.0。B 类地址的默认地址掩码是255.255.0.0。C 类地址的默认地址掩码是255.255.255.0 </li>
+<li>路由聚合(把许多前缀相同的地址用一个来代替) 有利于减少路由表中的项目，减少路由器之间的路由选择信息的交换，从而提高了整个因特网的性能。</li>
+<li>“转发”和“路由选择”有区别。“转发”是单个路由器的动作。“路由选择”是许多路由器共同协作的过程，这些路由器相互交换信息，目的是生成路由表，再从路由表导出转发表。若果用自适应路由选择算法，则当网络拓扑变化时，路由表和转发表都能够自动更新。在许多情况下,可以不考虑转发表和路由表的区别，而都使用路由表这一名词。</li>
+<li>自治系统(AS) 就是在单一的技术管理下的一组路由器。一个自治系统对其他自治系统表现出的是一一个单一的和一致的路由选择策略。</li>
+<li>路由选择协议有两大类: 内部网关协议(或自治系统内部的路由选择协议)，如RIP和OSPF: 外部网关协议(或自治系统之间的路由选择协议)，如BGP-4.</li>
+<li>RIP 是分布式的基于距离向量的路由选择协议，只适用于小型互联网。RIP 按固定的时间间隔与相邻路由器交换信息。交换的信息是自己当前的路由表，即到达本自治系统中所有网络的(最短) 距离，以及到每个网络应经过的下一跳路由器.</li>
+<li>OSPF 是分布式的链路状态协议，适用于大型互联网。OSPF 只在链路状态发生变化时，才用向本自治系统中的所有路由器，用洪泛法发送与本路由器相邻的所有路由器的链路状态信息。“链路状态”指明本路由器都和哪些路由器相邻，以及该链路的“度量”。“度量”可表示费用、距离、时延，惜宽等，可统称为“代价”。所有的路由器最终都能建立一个全网的拓扑结构图。</li>
+<li>BGP-4 是不同AS 的路由器之间交换路由信息的协议，是一种路径向量路由选择协议。BGP 力求寻找一条能够到达目的网络(可达) 且比较好的路由(不兜圈子),而并非要寻找一条最佳路由。</li>
+<li>网际控制报文协议ICMP 是IP 层的协议。ICMP报文作为IP 数据报的数据，加上首部后组成IP 数据报发送出去。使用ICMP 并不是实现了可靠传输。ICMP 允许E机或路由器报告差错情况和提供有关异常情况的报告。ICMP 报文的种类有两种，即ICMP差错报告报文和ICMP询问报文。</li>
+<li>ICMP 的一个重要应用就是分组网间探测PING,用来测试两台主机之间的连通性。PING使用了ICMP 回送请求与回送答报文。</li>
+<li>虚拟专用网VPN 利用公用的因特网作为本机构各专用网之间的通信载体。VPN 内部使用因特网的专用地址。一个VPN 至少要有一个路由器具有合法的全球IP 地址，这样才能和本系统的另一个VPN 通过因特网进行通信。所有通过因特网传送的数据都必须加密。</li>
+<li>使用网络地址转换NAT技术，可以在专用网络内部使用专用IP地址，而仅在连接到因特网的路由器使用全球IP地址。这样就大大节约了宝贵的IP地址。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2018/02/12/计算机网络/4 第四章 网络层/" data-id="ckkdeehbo000op5jzk1ucc2cw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/01/总结/Linux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux 总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/05/总结/JavaScript 总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript 总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

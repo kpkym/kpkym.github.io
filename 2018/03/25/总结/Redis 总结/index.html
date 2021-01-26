@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Redis 总结 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="config set password ‘123456’ auth 123456  ps -ef|grep redis  select 切换数据库 dbsize 常看当前数据库的key的数量 flushdb 清空当前数据库 flushall 清空全部数据库 统一密码管理，16个库都是同样密码">
+<meta name="keywords" content="总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 总结">
+<meta property="og:url" content="https://github.com/kpkym/2018/03/25/总结/Redis 总结/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="config set password ‘123456’ auth 123456  ps -ef|grep redis  select 切换数据库 dbsize 常看当前数据库的key的数量 flushdb 清空当前数据库 flushall 清空全部数据库 统一密码管理，16个库都是同样密码">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-31T19:51:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis 总结">
+<meta name="twitter:description" content="config set password ‘123456’ auth 123456  ps -ef|grep redis  select 切换数据库 dbsize 常看当前数据库的key的数量 flushdb 清空当前数据库 flushall 清空全部数据库 统一密码管理，16个库都是同样密码">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-总结/Redis 总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/25/总结/Redis 总结/" class="article-date">
+  <time datetime="2018-03-25T08:33:16.000Z" itemprop="datePublished">2018-03-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Redis/">Redis</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis 总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>config set password ‘123456’</li>
+<li>auth 123456</li>
+</ul>
+<p><strong>ps -ef|grep redis</strong></p>
+<ul>
+<li>select 切换数据库</li>
+<li>dbsize 常看当前数据库的key的数量</li>
+<li>flushdb 清空当前数据库</li>
+<li>flushall 清空全部数据库</li>
+<li>统一密码管理，16个库都是同样密码</li>
+</ul>
+<a id="more"></a>
+<h1 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h1><ul>
+<li>keys *</li>
+<li>exists key # 判断是否存在</li>
+<li>move key db # 当前库key转移</li>
+<li>expire key 秒 # 设置过期时间</li>
+<li>ttl key # 查看还有多少秒过期，-1表示永不过期，-2表示已过期 </li>
+<li>type key # 查看key类型</li>
+</ul>
+<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
+<li>set/ get/ del/ append/ strlen</li>
+<li>incr/ decr/ incrby/ decrby # 一定要是数字才能进行加减</li>
+<li>getrange/ setrange</li>
+<li>setex(set with expire)键秒值/ setnx(set if not exist)</li>
+<li>mset/ mget/ msetnx</li>
+<li>getset(先get再set)</li>
+</ul>
+<h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><ul>
+<li>lpush/ rpush/ lrange</li>
+<li>lpop/ rpop</li>
+<li>lindex # 按照索引下表获得元素（从上到下）</li>
+<li>llen</li>
+<li>lrem key # 删N个value</li>
+<li>ltrim key 开始index 结束index # 截取指定范围的值后再复制给key</li>
+<li>rpoplpush 源列表 目的列表</li>
+<li>lset key index value</li>
+<li>linsert key before/ after 值1 值2</li>
+<li>性能总结</li>
+</ul>
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><ul>
+<li>sadd/ smembers/ sismember</li>
+<li>scard # 获取集合里面的元素个数</li>
+<li>srem key value # 删除集合中元素</li>
+<li>srandmember key # 某个整数(随机出几个数)</li>
+<li>spop key # 随机出栈</li>
+<li>smove key1 key2 在key1里某个值 # 作用是将key1里的某个值赋给key2</li>
+<li>数学集合<ul>
+<li>差集: sdiff</li>
+<li>交集: sinter</li>
+<li>并集: sunion</li>
+</ul>
+</li>
+</ul>
+<h1 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h1><ul>
+<li>hset/ hget/ hmset/ hmget/ hgetall /hdel</li>
+<li>hlen</li>
+<li>hexists key</li>
+<li>hkeys/ hvals</li>
+<li>hincrby/ hincrbyfloat</li>
+<li>hsetnx</li>
+</ul>
+<h1 id="Zset"><a href="#Zset" class="headerlink" title="Zset"></a>Zset</h1><blockquote>
+<p>在set基础上，加一个score值。<br>之前set是k1 v1 v2 v3,<br>现在时zset k1 score1 v1 score2 v2</p>
+<ul>
+<li>zadd/ zrange<ul>
+<li>[withscores]</li>
+</ul>
+</li>
+<li>zrangebyscore key 开始score 结束 score<ul>
+<li>withscore</li>
+<li>( 不包括</li>
+<li>limit 开始下标步 多少步</li>
+</ul>
+</li>
+<li>zrem key 某score下对应的value值，作用是删除元素</li>
+<li>zcard/ zcount key score区间/ zrank key values值，作用是获得下标值/ zscore jey 对应值，获得分</li>
+<li>zrevrank key values值，作用是逆序获得下标值</li>
+<li>zrevrange</li>
+<li>zrevrangebyscore key 结束score 开始score</li>
+</ul>
+</blockquote>
+<h1 id="过期策略"><a href="#过期策略" class="headerlink" title="过期策略"></a>过期策略</h1><ol>
+<li>volatile-lru：使用LRU算法移除key，只对设置了过期时间的键</li>
+<li>allkeys-lru：使用LRU算法移除key</li>
+<li>volatile-random：在过期集合中移除随机的key，只对设置了过期时间的键</li>
+<li>allkeys-random：移除随机的key</li>
+<li>volatile-ttl：移除那些TTL值最小的key，即那些最近要过期的key</li>
+<li>noeviction：不进行移除。针对写操作，只是返回错误信息</li>
+</ol>
+<h1 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h1><p>在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是Snapshot快照，它恢复时是将快照文件直接读到内存里  需要立即生效：save或 bgsave</p>
+<blockquote>
+<ul>
+<li>优势<ul>
+<li>适合大规模的数据恢复</li>
+<li>对数据完整性和一致性要求不高</li>
+</ul>
+</li>
+<li>劣势<ul>
+<li>在一定间隔时间做一次备份，所以如果redis意外down掉的话，就会丢失最后一次快照后的所有修改</li>
+<li>Fork的时候，内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑 </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是Snapshot快照，它恢复时是将快照文件直接读到内存里Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入到个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化后的数据可能丢失。</p>
+<h1 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h1><p><strong>以日志的形式来记录每个写操作。</strong>将Redis执行过所有写指令记录下来(读操作不记录),只许追加文件但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作</p>
+<p>redis-check-aof –fix appendonly.aof  /  bgrewriteaof</p>
+<p>Appendfsync: Always, Everysec(会丢失一秒数据), No</p>
+<p>AOF文件持续增长而过大时，会fork出一条新进程来将文件重写(也是先写临时文件最后再rename)，遍历新进程的内存中数据，每条记录有一条的Set语句。重写aof文件的操作，并没有读取旧的aof文件，而是将整个内存中的数据库内容用命令的方式重写了一个新的aof文件，这点和快照有点类似<strong>Redis会记录上次重写时的AOF大小，默认配置是当AOF文件大小是上次rewrite后大小的一倍且文件大于64M时触发</strong></p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul>
+<li>DISCARD</li>
+<li>EXEC</li>
+<li>MULTI</li>
+<li><p>WATCH </p>
+<blockquote>
+<p>监控了一个或多个key，如果key被修改了，后面一个事务的执行失效。Watch指令，类似乐观锁，事务提交时，如果Key的值已被别的客户端改变，整个事务队列都不会被执行</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WATCH balance</span><br><span class="line">MULTI</span><br><span class="line">decrby balance 20</span><br><span class="line">incrby debt 20</span><br><span class="line">EXEC</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>UNWATCH</p>
+<blockquote>
+<p>取消监控所有key</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>一旦执行了exec之前加的监控锁都会被取消掉了</strong></p>
+<h1 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h1><ul>
+<li>PSUBSCRIBE<blockquote>
+<p>订阅一个或多个符合给定模式的频道</p>
+</blockquote>
+</li>
+<li>PUBSUB<blockquote>
+<p>查看订阅与发布系统状态</p>
+</blockquote>
+</li>
+<li>PUBLISH channel message</li>
+<li>PUNSUBSCRIBE<blockquote>
+<p>退订所有符合给定模式的频道</p>
+</blockquote>
+</li>
+<li>SUBSCRIBE</li>
+<li>UNSUBSCRIBE</li>
+</ul>
+<h1 id="主从复制-读写分离"><a href="#主从复制-读写分离" class="headerlink" title="主从复制 读写分离"></a>主从复制 读写分离</h1><ul>
+<li>info replication</li>
+<li><p>SLAVEOF 127.0.0.1 63879 / SLAVEOF no one</p>
+</li>
+<li><p>只有主机可以写 从机只能读</p>
+</li>
+<li>主机挂了 从机保持从机状态， 主机恢复 从机自动连接</li>
+<li>从机挂了 不会自动连接 需要手动重新连接/ 除非修改配置文件</li>
+</ul>
+<p><strong>一个salve可以是另一个redis的master info replication显示salve</strong></p>
+<h2 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h2><ol>
+<li>slave启动成功连接到master后会发送一个sync命令</li>
+<li>Master接到命令启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕之后，master将传送整个数据文件到slave,以完成一次完全同步</li>
+<li>全量复制：而slave服务在接收到数据库文件数据后，将其存盘并加载到内存中。</li>
+<li>增量复制：Master继续将新的所有收集到的修改命令依次传给slave,完成同步</li>
+<li>但是只要是重新连接master,一次完全同步（全量复制)将被自动执行</li>
+</ol>
+<h2 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h2><ol>
+<li>redis目录下新建sentinel.conf文件</li>
+<li>sentinel monitor 被监控数据库名字(自己起名字) 127.0.0.1 6379 1</li>
+<li>上面最后一个数字1，表示主机挂掉后salve投票看让谁接替成为主机，得票数多少后成为主机</li>
+<li>redis-sentinel /myredis/sentinel.conf</li>
+</ol>
+<p><strong>如果旧主机恢复连接会成为新主机的SLAVE</strong></p>
+<blockquote>
+<p>复制的缺点：<br>由于所有的写操作都是先在Master上操作，然后同步更新到Slave上，所以从Master同步到Slave机器有一定的延迟，当系统很繁忙的时候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2018/03/25/总结/Redis 总结/" data-id="ckkdeehbf000bp5jzls0iadwh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/31/计算机网络/6 第六章 应用层/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          应用层
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/17/计算机网络/5 第五章 运输层/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">运输层</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

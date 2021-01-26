@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>数据链路层 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="三个基本问题数据链路层协议有许多种.但有三个基本问题则是共同的.这三个基本问题是：封装成帧、透明传输和差错检测，下面分别讨论这三个基本问题， 最大传送单元MTU 透明传输为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据链路层">
+<meta property="og:url" content="https://github.com/kpkym/2018/01/16/计算机网络/3 第三章 数据链路层/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="三个基本问题数据链路层协议有许多种.但有三个基本问题则是共同的.这三个基本问题是：封装成帧、透明传输和差错检测，下面分别讨论这三个基本问题， 最大传送单元MTU 透明传输为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SO">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005UDS28gy1fpe9w0dk3qj30ny0aqmxn.jpg">
+<meta property="og:updated_time" content="2018-03-16T16:38:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据链路层">
+<meta name="twitter:description" content="三个基本问题数据链路层协议有许多种.但有三个基本问题则是共同的.这三个基本问题是：封装成帧、透明传输和差错检测，下面分别讨论这三个基本问题， 最大传送单元MTU 透明传输为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SO">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005UDS28gy1fpe9w0dk3qj30ny0aqmxn.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-计算机网络/3 第三章 数据链路层" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/16/计算机网络/3 第三章 数据链路层/" class="article-date">
+  <time datetime="2018-01-16T08:45:20.000Z" itemprop="datePublished">2018-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机网络/">计算机网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据链路层
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="三个基本问题"><a href="#三个基本问题" class="headerlink" title="三个基本问题"></a>三个基本问题</h1><p>数据链路层协议有许多种.但有三个基本问题则是共同的.这三个基本问题是：封装成帧、透明传输和差错检测，下面分别讨论这三个基本问题，</p>
+<p><strong>最大传送单元MTU</strong></p>
+<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><p>为了解决透明传输问题，就必须设法使数据中可能出现的控制字符“SOH”和“EOT”在接收端不被解释为控制字符。具体的方法是:发送端的数据链路层在数据中出现控制字符的前面插入一一个转义字符“ESC”(其十六进制编码是1B,进制是“SOH”或“EOT”00011011)。而在接收端的数据链路层在把数据送往网络层之前删除这个插入的转义字符。这种方法称为字节填充(byte stuffing)或字符填充(character stuffing)。如果转义字符也出现在数据当中，那么解决方法仍然是在转义字符的前面插入一个转义字符。因此,当接收端收到连续的两个转义字符时，就刪除其中前面的一个。图3-7 表示用字节填充法解决透明传输的问题。<br><img src="http://ww1.sinaimg.cn/large/005UDS28gy1fpe9w0dk3qj30ny0aqmxn.jpg" alt></p>
+<a id="more"></a>
+<h2 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h2><p>如果提高信噪比，就可以使误码率减小</p>
+<p>循环冗余校验CRC</p>
+<h3 id="传输差错可分为两大类"><a href="#传输差错可分为两大类" class="headerlink" title="传输差错可分为两大类"></a>传输差错可分为两大类</h3><ul>
+<li>一类是前面所说的最基本的毕业差错</li>
+<li>另一类:帧丢失，帧重复，帧失序</li>
+</ul>
+<h1 id="PPP点对点协议"><a href="#PPP点对点协议" class="headerlink" title="PPP点对点协议"></a>PPP点对点协议</h1><ul>
+<li>简单</li>
+<li>封装成帧</li>
+<li>透明性</li>
+<li>多种网络层协议<blockquote>
+<p>IP, IPX</p>
+</blockquote>
+</li>
+<li>多种类型链路<blockquote>
+<p>串行的 并行的</p>
+</blockquote>
+</li>
+<li>差错检测</li>
+<li>检测连接状态</li>
+<li>最大传送单元</li>
+<li>网络层地址协商</li>
+<li>数据压缩协商<blockquote>
+<p>在TCP/IP 协议族中，可靠传输由运输层的TCP 协议负责，因此数据链路层的PPP协议不需要进行纠错，不需要设置序号，也不需要进行流量控制。PPP 协议不支持多点线路(即一个主站轮流和链路上的多个从站进行通信)，而只支持点对点的链路通信。此外,PPP协议只支持全双工链路。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="PPP协议有三个组成部分"><a href="#PPP协议有三个组成部分" class="headerlink" title="PPP协议有三个组成部分"></a>PPP协议有三个组成部分</h2><ol>
+<li>一个将IP数据报封装到串行链路的方法</li>
+<li>一个用来简历、配置和测试数据链路连接的链路控制协议LCP</li>
+<li>一套网络控制协议NCP</li>
+</ol>
+<h2 id="PPP协议的工作的状态"><a href="#PPP协议的工作的状态" class="headerlink" title="PPP协议的工作的状态"></a>PPP协议的工作的状态</h2><p>上一节我们通过PPP帧的格式讨论了PPP帧是怎样组成的。但PPP链路一开始是怎样被初始化的?</p>
+<blockquote>
+<p>当用户拨号接入ISP 后，就建立了一条从用户PC 到ISP的物理连接。这时，用户PC向ISP发送一系列的链路控制协议LCP 分组(封装成多个PPP帧)，以便建立LCP连接。这些分组及其响应选择了将要使用的一些PPP参数.接着还要进行网络层配置，网络控制协议NCP给新接入的用户PC 分配一个临时的IP地址。这样，用户PC 就成为因特<br>网上的一个有IP地址的主机了。</p>
+<blockquote>
+<p>当用户通信完毕时，NCP释放网络层连接，收回原来分配出去的IP地址.接着，LCP释放数据链路层连接。最后释放的是物理层的连接。</p>
+</blockquote>
+</blockquote>
+<h1 id="本章重要概念"><a href="#本章重要概念" class="headerlink" title="本章重要概念"></a>本章重要概念</h1><ul>
+<li>链路是从一个结点到相邻结点的一段物理线路，数据链路则是在链路的基础上增加了一些必要的硬件(如网络适配器) 和软件(如协议的实现).</li>
+<li>数据链路层使用的信道主要有点对点信道和广播信道两种。</li>
+<li>数据链路层传送的协议数据单元是帧。数据链路层的三个基本问题则是: 封装成帧、透明传输和差错检测。</li>
+<li>循环冗余检验CRC 是一种检错方法，而帧检验序列FCS 是添加在数据后面的冗余码。</li>
+<li>点对点协议PPP 是数据链路层使月的最多的一种协议，它的特点是: 简单: 只检测差错，而不是纠正，差错: 不使用序号，也不进行流量控制: 可同时支持多种网络层协议。</li>
+<li>PPoE 是为宽带上网的主机使用的链路层协议。</li>
+<li>局城网的优点是: 几有广播功能，从一个站点可很方便地访问全网: 便于系统的扩展和逐渐地演变;提高了系统的可靠性、可用性和生存性。</li>
+<li>共享通信媒体资源的方法有二，一是静态划分信道(各种复用技术)，二是动态媒体接入控制，又称为多点接入(随机接入或受控接入)。</li>
+<li>IEEE 802 委员会曾把局城网的数据链路层拆成两个子层，即逻辑链路控制(LLC) 子层(与传输媒体无关) 和媒体接入控制(MAC) 子层(与传输媒体有关)。但现在LLC 子层已成为历史。</li>
+<li>计算机与外界局城网的通信要通过通信适配器，它又称为网络接口卡或网卡。计算机的硬件地址就在适配器的ROM中。</li>
+<li>以太网采用无连接的工作方式，对发送的数据帧不进行编号，也不要求对方发回确认。目的站收到有差错帧就把它丢弃，其他什么也不做。</li>
+<li>以太网采用的协议是具有冲突检测的载波监听多点接入CSMACD.协议的要点是: 发送前先监听，边发送边监听，一旦发现总线上出现了碰撞，就立即停止发送。然后按照退避算法等待一段随机时间后再次发送。因此，每一个站在自己发送数据之后的一小段时间内，存在着遭遇碰撞的可能性。以太网上各站点都平等地争用以太网信道。</li>
+<li>目前的以太网基本上都是使用集线器的双绞线以太网。这种以太网在物理上是星形网，但在逻辑上则是总线形网。集线器工作在物理层，它的每个接口仅仅简单地转发比特，不进行碰撞检测。</li>
+<li>以太网的硬件地址，即MAC 地址实际上就是适配器地址或适配器标识符，与主机所在的地点无关。源地址和目的地址都是48位长。<br>以太网的适配器有过滤功能，它只接收单播帧，或广播帧，或多播帧。</li>
+<li>使用集线器可以在物理层扩展以太网(扩展后的以太网仍然是一个网络)。</li>
+<li>使用网桥可以在数据链路层扩展以太网(扩展后的以太网仍然是一一个网络)。网桥在转发帧时，不改变帧的源地址。网桥的优点是: 对帧进行转发和过滤，增大吞吐量; 扩大了网络物理范围: 提高了可靠性: 可互连不同物理层、不同MAC 子层和不同速率的以太网。网桥的缺点是: 增加了时延: 可能会产生广播风暴。</li>
+<li>交换式集线器常称为以太网交换机或第二层交换机(工作在数据链路层)。它就是个多接口的网桥，而每个接口都直接与某台单主机或另一个集线器相连，且工作在全双工方式。以太网交换机能同时连通许多对的接口，使每一对相互通信的主机都能像独占通信媒体那样，无碰撞地传输数据。</li>
+<li>高速以太网有100 Mb/s的快速以太网，吉比特以太网和10 Gb/s的10 吉比特以太网。最近还发展到100吉比特以太网。在宽带接入技术中，也常使用高速以太网进行接入。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2018/01/16/计算机网络/3 第三章 数据链路层/" data-id="ckkdeehbr000tp5jzm6jvr8cq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/05/总结/JavaScript 总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JavaScript 总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/11/总结/Git 总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Git 总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

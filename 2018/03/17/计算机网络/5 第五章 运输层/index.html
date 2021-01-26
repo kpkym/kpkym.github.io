@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>运输层 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="运输层协议概述进程之间的通信从通信和信息处理的角度看，运输层向它上面的应用层提供通信服务，它属于面向通信部分的最高层，同时也是用户功能中的最低层。当网络的边缘部分中的两个主机使用网络的核心部分的功能进行端到端的通信时，只有主机的协议栈才有运输层，而网络核心部分中的路由器在转发分组时都只用到下三层的功能。 可靠传输的工作原理连续 ARQ 协议连续 ARQ 协议规定，发送方每收到一个确认，就把发送窗口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运输层">
+<meta property="og:url" content="https://github.com/kpkym/2018/03/17/计算机网络/5 第五章 运输层/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="运输层协议概述进程之间的通信从通信和信息处理的角度看，运输层向它上面的应用层提供通信服务，它属于面向通信部分的最高层，同时也是用户功能中的最低层。当网络的边缘部分中的两个主机使用网络的核心部分的功能进行端到端的通信时，只有主机的协议栈才有运输层，而网络核心部分中的路由器在转发分组时都只用到下三层的功能。 可靠传输的工作原理连续 ARQ 协议连续 ARQ 协议规定，发送方每收到一个确认，就把发送窗口">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-24T16:06:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="运输层">
+<meta name="twitter:description" content="运输层协议概述进程之间的通信从通信和信息处理的角度看，运输层向它上面的应用层提供通信服务，它属于面向通信部分的最高层，同时也是用户功能中的最低层。当网络的边缘部分中的两个主机使用网络的核心部分的功能进行端到端的通信时，只有主机的协议栈才有运输层，而网络核心部分中的路由器在转发分组时都只用到下三层的功能。 可靠传输的工作原理连续 ARQ 协议连续 ARQ 协议规定，发送方每收到一个确认，就把发送窗口">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-计算机网络/5 第五章 运输层" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/17/计算机网络/5 第五章 运输层/" class="article-date">
+  <time datetime="2018-03-17T07:43:58.000Z" itemprop="datePublished">2018-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/计算机网络/">计算机网络</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      运输层
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="运输层协议概述"><a href="#运输层协议概述" class="headerlink" title="运输层协议概述"></a>运输层协议概述</h1><h2 id="进程之间的通信"><a href="#进程之间的通信" class="headerlink" title="进程之间的通信"></a>进程之间的通信</h2><p>从通信和信息处理的角度看，运输层向它上面的应用层提供通信服务，它属于面向通信部分的最高层，同时也是用户功能中的最低层。当网络的边缘部分中的两个主机使用网络的核心部分的功能进行端到端的通信时，只有主机的协议栈才有运输层，而网络核心部分中的路由器在转发分组时都只用到下三层的功能。</p>
+<h1 id="可靠传输的工作原理"><a href="#可靠传输的工作原理" class="headerlink" title="可靠传输的工作原理"></a>可靠传输的工作原理</h1><h2 id="连续-ARQ-协议"><a href="#连续-ARQ-协议" class="headerlink" title="连续 ARQ 协议"></a>连续 ARQ 协议</h2><p>连续 ARQ 协议规定，发送方每收到一个确认，就把发送窗口向前滑动一个分组的位置，接收方一般都是采用<strong>积累确认</strong>的方式。这就是说，接收方不必对收到的分组逐个发送确认，而是在收到几个分组后，对按序列到达的最后一个分组发送确认，这就表示：到这个分组位置的所有分组都已正确收到了。</p>
+<p>累积确认有优点也有缺点。</p>
+<ul>
+<li>优点是: 容易实现，即使确认丢失也不必重传。</li>
+<li>但缺点是不能向发送方反映出接收方已经正确收到的所有分组的信息。<blockquote>
+<p>例如，如果发送方发送了前5个分組，而中间的第3个分组丢失了。这时接收方只能对前两个分组发出确认。发送方无法知道后面三个分组的下落，而只好把后面的三个分组都再重传一次。这就叫做Go-back-N (回退N)，表示需要再退回来重传已发送过的N个分组。可见当通信线路质量不好时，连续ARQ协议会带来负面的影响。</p>
+</blockquote>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="本章重要概念"><a href="#本章重要概念" class="headerlink" title="本章重要概念"></a>本章重要概念</h1><ul>
+<li>运输层提供应用进程间的逻辑通信，也就是说，运输层之间的通信并不是真正在两个运输层之间直接传送数据。运输层向应用层屏蔽了下面网络的细节(如网络拓扑、所采用的路由选择协议等)，它使应用进程看见的就是好像在两个运输层实体<br>之间有一条端到端的逻辑通信信道。</li>
+<li>网络层为主机之间提供逻辑通信，而运输层为应用进程之间提供端到端的逻辑通<br>信。</li>
+<li>运输层有两个主要的协议: TCP 和UDP。它们都有复用和分用，以及检错的功能。当运输层采用面向连接的TCP协议时，尽管下面的网络是不可靠的(只提供<br>尽最大努力服务)，但这种逻辑通信信道就相当于一条全双工通信的可靠信道。当<br>运输层采用无连接的UDP协议时，这种逻辑通信信道仍然是一条不可靠信道。</li>
+<li>运输层用一个16 位端口号来标志一个端口。端口号只具有本地意义，它只是为了标志本计算机应用层中的各个进程在和运输层交互时的层间接口。在因特网的不同计算机中，相同的端口号是没有关联的。</li>
+<li>两台计算机中的进程要互相通信，不仅要知道对方的IP 地址(为了找到对方的计算机)，而且还要知道对方的端口号(为了找到对方计算机中的应用进程)。</li>
+<li>运输层的端口号分为服务器端使用的端口号(0~1023 指派给熟知端口1024~<br>49151是登记端口号) 和客户端暂时使用的端口号(49152~65535)。</li>
+<li>UDP的主要特点是: (1) 无连接: (2) 尽最大努力交付: (3) 面向报文; (4) 无拥塞控制; (5) 支持一对一、一对多、多对一和一和多对多的交互通信: (6) 首部开销小 (只有四个字段: 源端口、目的端口、长度、检验和)。</li>
+<li>TCP 的主要特点是: (1) 面向连接; (2) 每一条TCP 连接只能是点对点的(一对一); (3) 提供可靠交付的服务: (4) 提供全双工通信: (5) 面向字节流。</li>
+<li>TCP用主机的IP地址加上主机上的端口号作为TCP连接的端点。这样的端点就叫<br>做套接字(socket) 或插口。套接字用(IP地址: 端口号) 来表示。</li>
+<li>停止等待协议能够在不可靠的传输网络上实现可靠的通信。每发送完一个分组就停止发送，等待对方的确认。在收到确认后再发送下一个分组。分组需要进行编号。</li>
+<li>超时重传是指只要超过了一段时间仍然没有收到确认，就重传前面发送过的分组<br>(认为刚才发送的分组丢失了)。因此每发送完一个分组需要设置一个超时计时器，其重传时间应比数据在分组传输的平均往返时间更长一些。这种自动重传方式<br>常称为自动重传请求ARQ。</li>
+<li>在停止等待协议中，若接收方收到重复分组，就丢弃该分组，但同时还要发送确<br>认。</li>
+<li>连续ARQ协议可提高信道利用率。发送方维持一一个发送窗口，凡位于发送窗口内的分组都可连续发送出去，而不需要等待对方的确认。接收方一般采用累积确认，对按序到达的最后一个分组发送确认，表明到这个分组为止的所有分组都已正确收到了。</li>
+<li>TCP 报文段首部的前20 个字节是固定的，后面有4N字节是根据需要而增加的选项i(N是整数)。在一个TCP连接中传送的字节流中的每一个字节都按顺序编号。首部中的序号字段值则指的是本报文段所发送的数据的第一个字节的序号。</li>
+<li>TCP 首部中的确认号是期望收到对方下一个报文段的第一个数据字节的序号。若确认号为N，则表明: 到序号N-1为止的所有数据都已正确收到。</li>
+<li>TCP 首部中的窗口字段指出了现在允许对方发送的数据量。窗口值是经常在动态变化着的。</li>
+<li>TCP 使用滑动窗口机制。发送窗口里面的序号表示允许发送的序号。发送窗口后沿的后面部分表示已发送且已收到了确认，而发送窗口前沿的前面部分表示不允许发送的。发送窗口后沿的变化情况有两种可能，即不动(没有收到新的确认) 和前移(收到了新的确认)。发送窗口前沿通常是不断向前移动的。</li>
+<li>流量控制就是让发送方的发送速率不要太快，要让接收方来得及接收。</li>
+<li>在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络的性能就要变坏。这种情况就叫做拥塞。拥塞控制就是防止过多的数据注入到网络中，这样可以使网络中的路由器或链路不致过载。</li>
+<li>流量控制是一个端到端的问题，是接收端抑制发送端发送数据的速率，以便使接收端来得及接收。拥塞控制是一个全局性的过程，涉及到所有的主机、所有的路由<br>器，以及与降低网络传输性能有关的所有因素。</li>
+<li>为了进行拥塞控制，TCP的发送方要维持一个拥塞窗口cwnd 的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化。发送方让自己的发送窗口取为拥塞窗口和接收方的接收窗口中较小的一个。</li>
+<li>TCP 的拥塞控制采用了四种算法，即慢开始、拥塞避免，快重传和快恢复。在网络层，也可以使路由器采用适当的分组丢弃策略(如随机早期检测RED)，以减少网络拥塞的发生。</li>
+<li>运输连接有三个阶段，即: 连接建立、数据传送和连接释放。</li>
+<li>主动发起TCP 连接建立的应用进程叫做客户，而被动等待连接建立的应用进程叫做服务器。TCP 的连接建立采用三次握手机制。服务器要确认客户的连接请求，然后客户要对服务器的确认进行确认。</li>
+<li>TCP 的连接释放采用四次握手机制。任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后就进入半关闭状态。当另一方也没有数据再发送时，则发送连接释放通知，对方确认后就完全关闭了TCP连接。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2018/03/17/计算机网络/5 第五章 运输层/" data-id="ckkdeehbp000qp5jz3xynw8f2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/25/总结/Redis 总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Redis 总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/01/总结/Linux/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux 总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

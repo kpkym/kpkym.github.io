@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>WEB应用体系结构 | kpkym&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="容器Servlet也需要帮助。请求到来时，必须有人实例化servlet,或者至少要建一个新的线程处理这个请求，必须有人调用servlet的doPost()或doGet()方法。另外，对了，那些方法还有一些重要的参数一一HTTP请求和HTTP响应对象，所以必须有人把请求和响应交给servlet.还得有人管理servlet的生与死以及servlet的资源。这个“人”就是Web容器。 Tomcat就是这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEB应用体系结构">
+<meta property="og:url" content="https://github.com/kpkym/2017/08/15/Head First Servlets and JSP/02. WEB应用体系结构/index.html">
+<meta property="og:site_name" content="kpkym&#39;s blog">
+<meta property="og:description" content="容器Servlet也需要帮助。请求到来时，必须有人实例化servlet,或者至少要建一个新的线程处理这个请求，必须有人调用servlet的doPost()或doGet()方法。另外，对了，那些方法还有一些重要的参数一一HTTP请求和HTTP响应对象，所以必须有人把请求和响应交给servlet.还得有人管理servlet的生与死以及servlet的资源。这个“人”就是Web容器。 Tomcat就是这">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-16T06:28:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WEB应用体系结构">
+<meta name="twitter:description" content="容器Servlet也需要帮助。请求到来时，必须有人实例化servlet,或者至少要建一个新的线程处理这个请求，必须有人调用servlet的doPost()或doGet()方法。另外，对了，那些方法还有一些重要的参数一一HTTP请求和HTTP响应对象，所以必须有人把请求和响应交给servlet.还得有人管理servlet的生与死以及servlet的资源。这个“人”就是Web容器。 Tomcat就是这">
+  
+    <link rel="alternate" href="/atom.xml" title="kpkym&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kpkym&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/kpkym"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Head First Servlets and JSP/02. WEB应用体系结构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/15/Head First Servlets and JSP/02. WEB应用体系结构/" class="article-date">
+  <time datetime="2017-08-15T13:21:58.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WEB应用体系结构
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>Servlet也需要帮助。请求到来时，必须有人实例化servlet,或者至少要建一个新的线程处理这个请求，必须有人调用servlet的<code>doPost()</code>或<code>doGet()</code>方法。另外，对了，那些方法还有一些重要的参数一一HTTP请求和HTTP响应对象，所以必须有人把请求和响应交给servlet.还得有人管理servlet的生与死以及servlet的资源。这个“人”就是Web容器。</p>
+<p>Tomcat就是这样一个容器。如果Web服务器应用(如Apache)得到一个指向某servlet的请求(面不是其他请求，如请求一个普通的静态HTML页面)，此时服务器不是把这个请求交阶servlel本身，面是交给部署该servlet的容器。当由容器向servlet提供HTTP请求和响应。而且要由容器调用servlet的方法，如<code>doPost()</code>或<code>doGet()</code>。</p>
+<a id="more"></a>
+<h2 id="容器如何处理请求"><a href="#容器如何处理请求" class="headerlink" title="容器如何处理请求"></a>容器如何处理请求</h2><ol>
+<li>用户点击一个链接，其URL指向一个servlet而不是静态页面。</li>
+<li>容器“看出来”这个请求要的是一个servlet，所以容器创建两个对象<ol>
+<li>HttpServletResponse;</li>
+<li>HttpServletRequest.</li>
+</ol>
+</li>
+<li>容器根据请求中的URL找到正确的servlet，为这个请求创建或分配一个线程，并把请求和响应对象传递给这个servlet线程</li>
+<li>容器调用servlet的<code>service()</code>方法。根据请求的不同类型，<code>service()</code>方法会调用doGet()或<code>doPost()</code>方法</li>
+<li>加入请求是doGet()方法，doGet()方法生成动态页面，并把这个页面“填入响应对象。要记住，容器还有响应对象一个的引用</li>
+<li>线程结束，容器把响应对象转换为一个HTTP响应，把它发回给客户，然后删除请求和响应对象</li>
+</ol>
+<h1 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h1><ol>
+<li>容器为Web 应用提供了通信支持、生命周期管理、多线程支持、声明方式安全，以及JSP 支持，这样你就能全神贯注地专心开发你自己的业务逻辑。</li>
+<li>容器创建一个请求对象和一个响应对象，servlet(或Web应用的其他部分)可以用这些对象得到有关请求的信息，并把信息发送给客户。</li>
+<li>典型的servlet是一个扩展了HttpServletRequest的类，而且覆盖一个或多个服务方法(doGet().doPost()等)，分别对应于浏览器调用的HTTP 方法。</li>
+<li>部署人员可以把servlet 类映射到一个URL,这样客户可以使用这个URL 来请求该servlet。部署名可以与实际的类文件名完全不同。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/kpkym/2017/08/15/Head First Servlets and JSP/02. WEB应用体系结构/" data-id="ckkdeehb10000p5jzetezv508" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/16/设计模式/组合模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          组合模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/15/设计模式/模板方法模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">模板方法模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Head-First-Servlets-and-JSP/">Head First Servlets and JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则表达式/">正则表达式</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/总结/" style="font-size: 20px;">总结</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/14/总结/RabbitMQ 总结/">RabbitMQ 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/01/总结/docker 总结/">Docker 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/31/计算机网络/6 第六章 应用层/">应用层</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/25/总结/Redis 总结/">Redis 总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/17/计算机网络/5 第五章 运输层/">运输层</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 kpkym<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
